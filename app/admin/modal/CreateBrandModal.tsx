@@ -8,9 +8,11 @@ import {IdentificationIcon} from "@heroicons/react/24/outline";
 
 export default function CreateBrandModal(props: props) {
     async function addBrandApi(e: FormData) {
-        const name: FormDataEntryValue | null = e.get("name");
-        const data: object = {name};
-        addBrand(data);
+        "use service"
+        const brand: FormDataEntryValue | null = e.get("name");
+        console.log(brand);
+        
+         addBrand(brand);
     }
 
     return (<>

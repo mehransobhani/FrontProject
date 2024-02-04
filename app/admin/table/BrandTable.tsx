@@ -4,7 +4,19 @@ import { useState } from "react";
 import CreateBrandModal from "../modal/CreateBrandModal";
 import BrandTableRow from "@/app/admin/TableRow/BrandTableRow";
 
-export default function BrandTable() {
+interface prop{
+    data:[propsData
+    ]
+}
+interface propsData{
+        id:string,
+        brand:string,
+        created_by:string,
+        created_date:string,
+        updated_date:string,
+ }
+
+export default function BrandTable(props:prop) {
     const [modal ,setModal]=useState(false);
 
     return (<>
@@ -53,51 +65,12 @@ export default function BrandTable() {
                         </thead>
 
                         <tbody>
-                        <BrandTableRow />
-                            <tr className="text-center hover:bg-gray-100">
-                                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4  text-blueGray-700 ">
-                                    ۱
-                                </th>
-                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
+                            {
+                                props.data.map((data)=>{return(<>
+                                     <BrandTableRow  data={data}/>
 
-                                    مهران
-                                </td>
-                                <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    سبختانی
-                                </td>
-                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    09194961416
-                                </td>
-
-                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <button className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-500 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">حذف</button>
-                                </td>
-                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <button className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">ویرایش</button>
-                                </td>
-                            </tr>
-                            <tr className="text-center">
-                                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4  text-blueGray-700 ">
-                                    ۱
-                                </th>
-                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
-
-                                    مهران
-                                </td>
-                                <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    سبختانی
-                                </td>
-                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    09194961416
-                                </td>
-
-                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <button className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-500 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">حذف</button>
-                                </td>
-                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <button className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">ویرایش</button>
-                                </td>
-                            </tr>
+                                </>)})
+                            } 
                         </tbody>
 
                     </table>
