@@ -5,6 +5,7 @@ import AdminNavbar from "@/app/admin/Navbar/AdminNavbar";
 import Sidebar from "@/app/admin/Sidebar/Sidebar";
 import localFont from 'next/font/local'
 import {NextFont} from "next/dist/compiled/@next/font";
+import {cookies} from "next/headers";
 
 
 const myFont:NextFont = localFont({ src: '../../public/font/Vazirmatn-Regular.woff2' })
@@ -19,12 +20,14 @@ export default function AdminLayout({
                                    }: Readonly<{
     children: React.ReactNode;
 }>) {
+
+
     return (
         <html lang="en">
         <body className={myFont.className} style={{direction:"rtl"}}>
         <Sidebar />
         <div className="relative md:mr-64 bg-blueGray-100">
-            <AdminNavbar />
+            <AdminNavbar  />
             {children}
         </div>
         </body>

@@ -70,7 +70,7 @@ export default function BrandTable(props:prop) {
                                      <BrandTableRow  data={data}/>
 
                                 </>)})
-                            } 
+                            }
                         </tbody>
 
                     </table>

@@ -7,6 +7,7 @@
     <mapping directory="$PROJECT_DIR$/../../GitBackup/LaravelShop" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../GitBackup/Shop/LARAVEL" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../GitBackup/Shop/Laravel" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../LocalGit/Academy/Laravel" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../LocalGit/Academy/lv" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../../LocalGit/LaravelShop" vcs="Git" />

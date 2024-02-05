@@ -1,3 +1,4 @@
+"use client"
 import {addBrand} from "@/app/admin/api/BrandApi";
 
 interface props {
@@ -8,11 +9,11 @@ import {IdentificationIcon} from "@heroicons/react/24/outline";
 
 export default function CreateBrandModal(props: props) {
     async function addBrandApi(e: FormData) {
-        "use service"
-        const brand: FormDataEntryValue | null = e.get("name");
-        console.log(brand);
-        
-         addBrand(brand);
+         const brand: FormDataEntryValue | null = e.get("name");
+
+         const newBrand= addBrand(brand);
+        console.log("newBrandIs",newBrand);
+
     }
 
     return (<>
