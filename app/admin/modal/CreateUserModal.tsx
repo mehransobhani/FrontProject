@@ -6,7 +6,7 @@ import { addUser } from "../api/UserApi";
 export default function CreateUserModal(props :props){
 
     async function addUserForm(e:FormData) {
-        
+
         let first_name=e.get("first_name");
         let last_name=e.get("last_name");
         let phone=e.get("phone");
@@ -15,7 +15,11 @@ export default function CreateUserModal(props :props){
 
         let formData={first_name:first_name,last_name:last_name,phone:phone,password:password , password_confirmation:password_confirmation}
 
-        addUser(formData);
+        await addUser(first_name,
+        last_name,
+        phone,
+        password,
+        password_confirmation);
      }
 
     return(<>

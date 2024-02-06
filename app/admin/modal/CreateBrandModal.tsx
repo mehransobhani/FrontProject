@@ -1,19 +1,17 @@
-"use client"
-import {addBrand} from "@/app/admin/api/BrandApi";
+ import {addBrand} from "@/app/admin/api/BrandApi";
 
 interface props {
-    close: any
+    close: any,
 }
 
 import {IdentificationIcon} from "@heroicons/react/24/outline";
+import {revalidatePath} from "next/cache";
 
 export default function CreateBrandModal(props: props) {
     async function addBrandApi(e: FormData) {
-         const brand: FormDataEntryValue | null = e.get("name");
 
-         const newBrand= addBrand(brand);
-        console.log("newBrandIs",newBrand);
-
+        const brand: FormDataEntryValue | null = e.get("name");
+        const newBrand = addBrand(brand, "s");
     }
 
     return (<>
@@ -27,7 +25,8 @@ export default function CreateBrandModal(props: props) {
                     </div>
                     <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">ایجاد برند</h1>
                     <form action={addBrandApi}>
-                        <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal"> نام برند</label>
+                        <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal"> نام
+                            برند</label>
                         <input name={"name"}
                                className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
                                placeholder="نام برند"/>

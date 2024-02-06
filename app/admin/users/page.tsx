@@ -1,10 +1,12 @@
  import {getUsers, login} from "../api/UserApi";
 import CustomerTable from "../table/CustomerTable";
+ import {cookies} from "next/headers";
 
 export default async function Home() {
 
-
-    const data = await getUsers();
+    const token:string|undefined=cookies().get("access-token")?.value;
+    console.log(token)
+    const data = await getUsers(token);
     console.log(data)
     return (
         <>

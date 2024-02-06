@@ -7,6 +7,7 @@ export  async  function middleware(request: NextRequest) {
 
     console.log(request.url)
     const ME:Response=await me();
+    console.log(ME)
     if(ME.status!=200 && ! request.url.match("/auth/login")) {
         return NextResponse.redirect(new URL('/auth/login', request.url))
     }

@@ -1,8 +1,4 @@
-import { useEffect } from "react";
- import CreateUserModal from "../modal/CreateUserModal";
-import CustomerTable from "../table/CustomerTable";
 import ServiceTable from "../table/ServiceTable";
-import { getUsers } from "../api/UserApi";
 import { getServices } from "../api/ServiceApi";
 
 export default async function Home() {

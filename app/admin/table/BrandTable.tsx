@@ -6,7 +6,7 @@ import BrandTableRow from "@/app/admin/TableRow/BrandTableRow";
 
 interface prop{
     data:[propsData
-    ]
+    ],
 }
 interface propsData{
         id:string,
@@ -21,7 +21,7 @@ export default function BrandTable(props:prop) {
 
     return (<>
       {
-        modal&&<CreateBrandModal close={()=>{setModal(false)}} />
+        modal&&<CreateBrandModal close={()=>{setModal(false)}}   />
     }
         <div className="w-full mb-12 xl:mb-0 px-4 mx-auto mt-24">
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
