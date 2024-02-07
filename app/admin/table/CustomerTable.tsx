@@ -3,8 +3,8 @@
 import { useState } from "react"
 import CreateUserModal from "../modal/CreateUserModal";
 interface prop{
-    data:[propsData
-    ]
+    data:[propsData],
+    token:string|undefined
 }
 interface propsData{
         id:string,
@@ -18,7 +18,7 @@ export default function CustomerTable(props:prop) {
     const [modal ,setModal]=useState(false);
     return (<>
     {
-        modal&&<CreateUserModal close={()=>{setModal(false)}} />
+        modal&&<CreateUserModal token={props.token} close={()=>{setModal(false)}} />
     }
 
         <div className="w-full mb-12 xl:mb-0 px-4 mx-auto mt-24">
@@ -100,11 +100,11 @@ export default function CustomerTable(props:prop) {
                                 <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                     <button className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">تغییر وضعیت</button>
                                 </td>
-                            </tr> 
+                            </tr>
                                 </>)
                                 })
                             }
-                           
+
                         </tbody>
 
                     </table>

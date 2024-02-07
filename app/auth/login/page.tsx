@@ -2,13 +2,16 @@ import {UserCircleIcon} from "@heroicons/react/24/outline";
 import {loginApi} from "@/app/auth/api/LoginApi";
 import {cookies} from "next/headers";
 import {redirect} from "next/navigation";
+import {LoginFormValidation} from "@/app/admin/FormValidation/FormValidation";
 
 export default async function login() {
     async function login(e: FormData) {
         "use server"
 
+
         let username: FormDataEntryValue | null = e.get("phone");
         let password: FormDataEntryValue | null = e.get("password");
+
         let data = await loginApi(username, password);
         if (data.access) {
             cookies().set("access-token", data.access);

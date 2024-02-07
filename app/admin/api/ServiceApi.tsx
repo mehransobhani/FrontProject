@@ -1,22 +1,47 @@
- export async function getServices() {
+"use server"
+import {revalidatePath} from "next/cache";
+
+export async function getServices(token:string|undefined) {
     const response = await fetch(process.env.api_base_url + "service/service-list",
         {
             headers: {
-                "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3MjQ3MzM2LCJpYXQiOjE3MDcyMzUzMzYsImp0aSI6Ijc4NDIwMmFiYWQ1NTQ1NGM5MWQ2MGRhNmNhYWZiOWQzIiwidXNlcl9pZCI6IjE2MDg0ZGE2LTU0ZmQtNGVlMy04NzhmLTFlM2NmM2E5MDJjZSIsInBob25lIjoiMDkxMjExMTExMTEiLCJwYXNzd29yZCI6InBia2RmMl9zaGEyNTYkNzIwMDAwJEFnMTJ5TVRzaEU1UEo3QVRVWG5UeVEkNGZtbmpMWWJKQTdGK1pPSE1TUTJ1dGJXVFlGK0FzTUdKMmVOYlRXQU5PZz0ifQ._XDqgl84F3poyhcaygg563OjbAtR04XUc8I3nol19Zo'
+                "Authorization": 'Bearer '+token
+            }
+        })
+    return response.json();
+}
+
+
+ export async function getServiceHistory(id:string|undefined,token:string|undefined) {
+    const response = await fetch(process.env.api_base_url + "service/service-history/"+id,
+        {
+            headers: {
+                "Authorization": 'Bearer '+token
             }
         }
     )
     return response.json();
 }
 
-
- export async function getServiceHistory(id:string|undefined) {
-    const response = await fetch(process.env.api_base_url + "service/service-history/"+id,
+export async function updateService(id:string|undefined,status:string|undefined,description:string|undefined,token:string|undefined) {
+    const response = await fetch(process.env.api_base_url + "service/service-update/"+id+"/",
         {
+            method:'POST',
+            body: JSON.stringify(
+                {
+                    status:status,
+                    description:description,
+                }
+            ),
             headers: {
-                "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3MjQ3MzM2LCJpYXQiOjE3MDcyMzUzMzYsImp0aSI6Ijc4NDIwMmFiYWQ1NTQ1NGM5MWQ2MGRhNmNhYWZiOWQzIiwidXNlcl9pZCI6IjE2MDg0ZGE2LTU0ZmQtNGVlMy04NzhmLTFlM2NmM2E5MDJjZSIsInBob25lIjoiMDkxMjExMTExMTEiLCJwYXNzd29yZCI6InBia2RmMl9zaGEyNTYkNzIwMDAwJEFnMTJ5TVRzaEU1UEo3QVRVWG5UeVEkNGZtbmpMWWJKQTdGK1pPSE1TUTJ1dGJXVFlGK0FzTUdKMmVOYlRXQU5PZz0ifQ._XDqgl84F3poyhcaygg563OjbAtR04XUc8I3nol19Zo'
+                "Content-Type": "application/json",
+
+                "Authorization": 'Bearer '+token
             }
         }
     )
-    return response.json();
+    if(response.status==201)
+     revalidatePath("/admin/services")
+    else
+        return response;
 }

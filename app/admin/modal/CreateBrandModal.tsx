@@ -1,17 +1,55 @@
- import {addBrand} from "@/app/admin/api/BrandApi";
+import {addBrand} from "@/app/admin/api/BrandApi";
 
 interface props {
     close: any,
+    token: string|undefined,
 }
 
 import {IdentificationIcon} from "@heroicons/react/24/outline";
-import {revalidatePath} from "next/cache";
+ import {BrandFormValidation} from "@/app/admin/FormValidation/FormValidation";
+import {useState} from "react";
+import {BrandNameValidation} from "@/app/admin/FormValidation/BrandFormValidation";
 
 export default function CreateBrandModal(props: props) {
-    async function addBrandApi(e: FormData) {
 
+    const [responseError, setResponseError] = useState(false);
+    const [brandValidationError, setBrandValidationError] = useState(undefined);
+    const [added, setAdded] = useState(false);
+
+    async function addBrandApi(e: FormData) {
         const brand: FormDataEntryValue | null = e.get("name");
-        const newBrand = addBrand(brand, "s");
+        try {
+            const validatedData = BrandFormValidation.parse({brand})
+        } catch (err: any) {
+            return;
+        }
+        try {
+            const newBrand: Response = await addBrand(brand, props.token);
+            console.log("NEW ", newBrand)
+
+            if (newBrand.status != 200 && newBrand.status != 201) {
+                setResponseError(true);
+            } else {
+                props.close();
+            }
+        } catch (e) {
+            console.log("NEW 22 ", e)
+
+            setResponseError(true);
+        }
+    }
+
+    function BrandValidationHandle(e: any) {
+        setResponseError(false)
+        const brand: FormDataEntryValue | undefined = e.target.value;
+        try {
+            const validatedData = BrandNameValidation.parse({brand})
+            setBrandValidationError(undefined)
+        } catch (err: any) {
+            let error = JSON.parse(err.message);
+            setBrandValidationError(error[0].message)
+            return;
+        }
     }
 
     return (<>
@@ -25,11 +63,24 @@ export default function CreateBrandModal(props: props) {
                     </div>
                     <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">ایجاد برند</h1>
                     <form action={addBrandApi}>
+
                         <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal"> نام
                             برند</label>
+
                         <input name={"name"}
+                               onBlur={BrandValidationHandle}
                                className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
                                placeholder="نام برند"/>
+                        {brandValidationError ? <div
+                            className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
+                            role="alert">
+                            {brandValidationError}
+                        </div> : ""}
+                        {responseError ? <div
+                            className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
+                            role="alert">
+                            خطایی در ثبت پیش امد
+                        </div> : ""}
                         <div className="flex items-center justify-start w-full">
                             <button type={"submit"}
                                     className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">ایجاد

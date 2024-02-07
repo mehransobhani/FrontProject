@@ -5,13 +5,11 @@ import CustomerTable from "../table/CustomerTable";
 export default async function Home() {
 
     const token:string|undefined=cookies().get("access-token")?.value;
-    console.log(token)
-    const data = await getUsers(token);
-    console.log(data)
-    return (
+     const data = await getUsers(token);
+     return (
         <>
          <main className="flex min-h-screen flex-col items-center justify-between p-12 bg-slate-50 text-blue-950">
-            <CustomerTable data={data} />
+            <CustomerTable data={data} token={token} />
         </main>
          </>
     );

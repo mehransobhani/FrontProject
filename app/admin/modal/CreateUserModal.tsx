@@ -1,10 +1,26 @@
+import {BrandNameValidation} from "@/app/admin/FormValidation/BrandFormValidation";
+
 interface props{
-    close:any
+    close:any,
+    token:string|undefined
 }
 import { UserCircleIcon } from "@heroicons/react/24/outline";
 import { addUser } from "../api/UserApi";
+import {useState} from "react";
+import {
+    UserFirstNameValidation,
+    UserLastNameValidation,
+    UserPasswordValidation,
+    UserPhoneValidation
+} from "@/app/admin/FormValidation/UserFormValidation";
 export default function CreateUserModal(props :props){
 
+    const [responseError, setResponseError] = useState(false);
+    const [passwordValidationError, setPasswordValidationError] = useState(undefined);
+    const [firstNameValidationError, setFirstNameValidationError] = useState(undefined);
+    const [lastNameValidationError, setLastNameValidationError] = useState(undefined);
+    const [phoneValidationError, setPhoneValidationError] = useState(undefined);
+    const [confirmPasswordValidationError, setConfirmPasswordValidationError] = useState(undefined);
     async function addUserForm(e:FormData) {
 
         let first_name=e.get("first_name");
@@ -13,14 +29,68 @@ export default function CreateUserModal(props :props){
         let password=e.get("password");
         let password_confirmation=e.get("password_confirmation");
 
-        let formData={first_name:first_name,last_name:last_name,phone:phone,password:password , password_confirmation:password_confirmation}
 
         await addUser(first_name,
         last_name,
         phone,
         password,
-        password_confirmation);
+        password_confirmation , props.token);
      }
+
+
+    function PasswordValidationHandle(e: any) {
+        setResponseError(false)
+        const password: FormDataEntryValue | undefined = e.target.value;
+        try {
+            const validatedData = UserPasswordValidation.parse({password})
+            setPasswordValidationError(undefined)
+        } catch (err: any) {
+            let error = JSON.parse(err.message);
+            setPasswordValidationError(error[0].message)
+            return;
+        }
+    }
+
+
+    function FirstNameValidationHandle(e: any) {
+        setResponseError(false)
+        const first_name: FormDataEntryValue | undefined = e.target.value;
+        try {
+            const validatedData = UserFirstNameValidation.parse({first_name})
+            setFirstNameValidationError(undefined)
+        } catch (err: any) {
+            let error = JSON.parse(err.message);
+            setFirstNameValidationError(error[0].message)
+            return;
+        }
+    }
+
+
+
+    function LastNameValidationHandle(e: any) {
+        setResponseError(false)
+        const last_name: FormDataEntryValue | undefined = e.target.value;
+        try {
+            const validatedData = UserLastNameValidation.parse({last_name})
+            setLastNameValidationError(undefined)
+        } catch (err: any) {
+            let error = JSON.parse(err.message);
+            setLastNameValidationError(error[0].message)
+            return;
+        }
+    }
+    function PhoneValidationHandle(e: any) {
+        setResponseError(false)
+        const phone: FormDataEntryValue | undefined = e.target.value;
+        try {
+            const validatedData = UserPhoneValidation.parse({phone})
+            setPhoneValidationError(undefined)
+        } catch (err: any) {
+            let error = JSON.parse(err.message);
+            setPhoneValidationError(error[0].message)
+            return;
+        }
+    }
 
     return(<>
              <div className="py-12 bg-gray-700 bg-opacity-80 transition duration-150 ease-in-out z-50 fixed top-0 right-0 bottom-0 left-0  " id="modal">
@@ -32,13 +102,34 @@ export default function CreateUserModal(props :props){
                         <form action={addUserForm}>
                         <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">ایجاد کاربر</h1>
                         <label   className="text-gray-800 text-sm font-bold leading-tight tracking-normal">نام</label>
-                        <input className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="نام" name="first_name" />
+                        <input onBlur={FirstNameValidationHandle}  className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="نام" name="first_name" />
+                            {firstNameValidationError ? <div
+                                className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
+                                role="alert">
+                                {firstNameValidationError}
+                            </div> : ""}
                         <label   className="text-gray-800 text-sm font-bold leading-tight tracking-normal">نام خانوادگی</label>
-                        <input className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="نام خانوادگی" name="last_name" />
+                        <input onBlur={LastNameValidationHandle}  className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="نام خانوادگی" name="last_name" />
+                            {lastNameValidationError ? <div
+                                className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
+                                role="alert">
+                                {lastNameValidationError}
+                            </div> : ""}
                         <label   className="text-gray-800 text-sm font-bold leading-tight tracking-normal">موبایل</label>
-                        <input className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="موبایل" name="phone" />
+                        <input onBlur={PhoneValidationHandle}  className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="موبایل" name="phone" />
+                            {phoneValidationError ? <div
+                                className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
+                                role="alert">
+                                {phoneValidationError}
+                            </div> : ""}
                         <label   className="text-gray-800 text-sm font-bold leading-tight tracking-normal">  رمز عبور  </label>
-                        <input className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="کلمه عیور"  name="password"/>
+                        <input onBlur={PasswordValidationHandle} className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="کلمه عیور"  name="password"/>
+                            {passwordValidationError ? <div
+                                className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
+                                role="alert">
+                                {passwordValidationError}
+                            </div> : ""}
+
                         <label   className="text-gray-800 text-sm font-bold leading-tight tracking-normal">تایید رمز عبور  </label>
                         <input className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder=" تکرار کلمه عیور"  name="password_confirmation"/>
 

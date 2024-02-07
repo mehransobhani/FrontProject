@@ -17,10 +17,11 @@ interface propObject {
     previous:boolean
 }
 interface prop {
-    data:  propObject 
+    data:  propObject ,
+    token:string|undefined
 }
 export default function ServiceTable(props: prop) {
-     
+
     return (<>
         <div className="w-full mb-12 xl:mb-0 px-4 mx-auto mt-24">
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
@@ -86,7 +87,7 @@ export default function ServiceTable(props: prop) {
                             {
                                 props.data.results.map((data) => {
                                     return (<>
-                                        <ServiceTableRow data={data} />
+                                        <ServiceTableRow data={data} token={props.token} />
 
                                     </>)
                                 })
