@@ -3,6 +3,7 @@ import {Disclosure} from "@headlessui/react";
 import Link from "next/link";
 import {Bars3Icon} from "@heroicons/react/24/solid";
 import {XMarkIcon} from "@heroicons/react/24/solid";
+import Header from "../Header/Header";
 
 export default function Nav(props:{bg:string}) {
     function classNames(...classes: any) {
@@ -43,10 +44,12 @@ export default function Nav(props:{bg:string}) {
 
             <Disclosure
                 as="nav"
-                className={` fixed top-0 left-0 right-0   text-neutral-900  border-b border-neutral-200 backdrop-blur-sm bg-white  z-20  `}
+                className={` fixed top-0 left-0 right-0 text-white  border-b border-neutral-200 backdrop-blur-sm  bg-sky-600  z-20  `}
             >
                 {({open}: { open: any }) => (
                     <>
+                                    <Header />
+
                         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                             <div className="relative flex h-16 items-center justify-between">
 
@@ -63,7 +66,7 @@ export default function Nav(props:{bg:string}) {
                                                             className={classNames(
                                                                 item.current
                                                                     ? "text-rose-500"
-                                                                    : "text-neutral-900  hover:text-rose-500",
+                                                                    : "text-white  hover:text-rose-500",
                                                                 "text-base font-medium px-4 "
                                                             )}
                                                             aria-current={item.current ? "page" : undefined}
@@ -73,7 +76,7 @@ export default function Nav(props:{bg:string}) {
                                                         {
                                                             item.sub ? <>
                                                                 <div
-                                                                    className={"absolute top-10 right-0 "}>
+                                                                    className={"absolute top-10 right-0 hidden "}>
                                                                     <ul className="border border-gray-200 rounded overflow-hidden shadow-md">
 
                                                                         {
@@ -127,7 +130,7 @@ export default function Nav(props:{bg:string}) {
                                                 className={classNames(
                                                     item.current
                                                         ? "text-rose-500 "
-                                                        : "text-neutral-900  ",
+                                                        : "text-white  ",
                                                     "block py-4 text-base font-medium border-b border-neutral-200  text-right"
                                                 )}
                                                 aria-current={item.current ? "page" : undefined}
