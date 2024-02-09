@@ -12,11 +12,32 @@
 
 export async function addBrand(brand:FormDataEntryValue|null , token:string|undefined) {
 
-    const response:Response = await fetch("http://193.36.84.151/service/add-brand/",
+    const response:Response = await fetch(process.env.api_base_url+ "service/add-brand/",
         {
             method: "POST",
             headers: {
-                'Origin':'http://193.36.84.151',
+                'Content-type': 'application/json',
+                "Authorization": 'Bearer '+token
+            },
+            body: JSON.stringify(
+             {brand:brand}
+            )
+
+        }
+    )
+     // revalidatePath("admin/brands");
+
+    return response;
+
+}
+
+
+export async function editBrand(id:string|null , brand:string|null , token:string|undefined) {
+
+    const response:Response = await fetch(process.env.api_base_url+ "service/edit-brand/"+id+"/",
+        {
+            method: "POST",
+            headers: {
                 'Content-type': 'application/json',
                 "Authorization": 'Bearer '+token
             },

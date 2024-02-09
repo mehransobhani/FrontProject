@@ -1,36 +1,70 @@
 
-export async function getUsers(token:string|undefined) {
+export async function getUsers(token: string | undefined) {
     const response = await fetch(process.env.api_base_url + "user/users-list",
         {
             headers: {
-                "Authorization": 'Bearer '+token
+                "Authorization": 'Bearer ' + token
             }
         }
     )
     return response.json();
 }
 
-export async function addUser( first_name:FormDataEntryValue|null,last_name:FormDataEntryValue|null,phone:FormDataEntryValue|null,password:FormDataEntryValue|null , password_confirmation:FormDataEntryValue|null , token:string|undefined) {
-    const response = await fetch("http://193.36.84.151/user/signup/",
+export async function addUser(first_name: FormDataEntryValue | null, last_name: FormDataEntryValue | null, phone: FormDataEntryValue | null, password: FormDataEntryValue | null, password_confirmation: FormDataEntryValue | null, token: string | undefined) {
+    const response = await fetch(process.env.api_base_url + "/user/signup/",
         {
-            method:"POST",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": 'Bearer '+token
+                "Authorization": 'Bearer ' + token
             },
             body: JSON.stringify(
-               {
-                   first_name:first_name,
-                   last_name:last_name,
-                   phone:phone,
-                   password:password,
-                   password_confirmation:password_confirmation,
-               }
+                {
+                    first_name: first_name,
+                    last_name: last_name,
+                    phone: phone,
+                    password: password,
+                    password_confirmation: password_confirmation,
+                }
             )
         }
     )
     return response;
 }
+
+export async function changeUserStatus(id: string | null, status: string | null, token: string | undefined) {
+    const response = await fetch(process.env.api_base_url + "user/change-status/" + id + "/",
+        {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer ' + token
+            },
+            body: JSON.stringify(
+                {
+                    user_status: status,
+                }
+            )
+        }
+    )
+    return response;
+}
+
+
+export async function resetPassword(id: string | null, token: string | undefined) {
+    const response = await fetch(process.env.api_base_url + "user/reset-password/" + id + "/",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer ' + token
+            },
+
+        }
+    )
+    return response;
+}
+
 interface userPass { username: string, password: "string" }
 export async function login() {
     const response = await fetch(process.env.api_base_url + "user/login/",

@@ -85,9 +85,9 @@ export default function ServiceTable(props: prop) {
 
                         <tbody>
                             {
-                                props.data.results.map((data) => {
+                                props.data.results.map((data , index) => {
                                     return (<>
-                                        <ServiceTableRow data={data} token={props.token} />
+                                        <ServiceTableRow index={index} data={data} token={props.token} />
 
                                     </>)
                                 })

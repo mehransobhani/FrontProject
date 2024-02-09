@@ -68,7 +68,7 @@ export default function BrandTable(props:prop) {
                         <tbody>
                             {
                                 props.data.map((data)=>{return(<>
-                                     <BrandTableRow  data={data}/>
+                                     <BrandTableRow  data={data} token={props.token}/>
 
                                 </>)})
                             }

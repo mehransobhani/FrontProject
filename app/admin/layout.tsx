@@ -28,7 +28,7 @@ export default function AdminLayout({
         <Sidebar />
         <div className="relative md:mr-64 bg-blueGray-100">
             <AdminNavbar  />
-            {children}
+            {children} 
         </div>
         </body>
         </html>

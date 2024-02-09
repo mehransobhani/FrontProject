@@ -14,7 +14,8 @@ interface data {
 }
 interface propsData {
     data: data,
-    token:string|undefined
+    token:string|undefined,
+    index:number
 }
 
 export default function ServiceTableRow(props: propsData) {
@@ -66,7 +67,7 @@ export default function ServiceTableRow(props: propsData) {
         <tr className="text-center hover:bg-gray-100">
 
             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
-                {props.data.id}
+                {props.index+1}
             </td>
             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
                 {props.data.first_name}
