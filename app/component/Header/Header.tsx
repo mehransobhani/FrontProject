@@ -1,13 +1,13 @@
 "use client"
-import logo from "@/public/icon/logo.jpeg"
+import logo from "@/public/icon/mad.png"
 import { log } from "console"
 import Image from "next/image"
 import Link from "next/link"
 import { PhoneIcon } from "@heroicons/react/24/solid";
-export default function Header(props: { bg: string }) {
+export default function Header() {
     return (
         <>
-            <div className="w-full bg-slate-100 py-5 text-black">
+            <div className="w-full bg-slate-100 py-5 text-black hidden sm:block">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ">
                     <div className="relative flex h-16 items-center justify-between">
 
@@ -16,7 +16,7 @@ export default function Header(props: { bg: string }) {
                             <div className="hidden sm:mx-6 sm:block">
                                 <div className="flex  items-start ">
                                     <div className="w-36" >
-                                        <Image src={logo} layout={"responsive"} />
+                                        <Image src={logo} layout={"responsive"} alt={"logo"} />
                                     </div>
 
                                 </div>

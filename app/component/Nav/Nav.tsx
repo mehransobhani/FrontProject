@@ -4,41 +4,39 @@ import Link from "next/link";
 import {Bars3Icon} from "@heroicons/react/24/solid";
 import {XMarkIcon} from "@heroicons/react/24/solid";
 import Header from "../Header/Header";
+import {useState} from "react";
+import {usePathname} from "next/navigation";
 
-export default function Nav(props:{bg:string}) {
+export default function Nav() {
+    const[openSubMenu,setOpenSubMenu]=useState(false);
     function classNames(...classes: any) {
         return classes.filter(Boolean).join(" ");
     }
 
+    const pathName=usePathname();
+    console.log(pathName)
     interface menu {
         name: string;
         href: string;
         current: boolean;
-        sub?: menu[];
+        sub?: menu[]|null;
     }
 
     const navigation: menu[] = [
-        {name: "صفحه اصلی", href: "/", current: false, sub: []},
+        {name: "صفحه اصلی", href: "/", current: pathName=="/", sub:null},
         {
             name: "خدمات",
-            href: "#services",
+            href: "",
             current: false,
-            sub: [{name: "خدماتخدماتخدمات", href: "#services", current: true}, {
-                name: "خدwdwdwdwdمات",
-                href: "#services",
+            sub: [  {
+                name: "درخواست پشتیبانی آنلاین",
+                href: "contact-us",
                 current: false
-            }, {
-                name: "خدwdwdwdwdمات",
-                href: "#services",
-                current: false
-            }, {
-                name: "خدwdwdwdwdمات",
-                href: "#services",
-                current: false
-            }]
+            } ]
         },
-        {name: "تماس با ما", href: "#faq", current: false, sub: []},
+        {name: "تماس با ما", href: "contact-us", current:  pathName=="/contact-us", sub: null},
     ];
+
     return (
         <>
 
@@ -65,26 +63,31 @@ export default function Nav(props:{bg:string}) {
                                                             href={item.href}
                                                             className={classNames(
                                                                 item.current
-                                                                    ? "text-rose-500"
-                                                                    : "text-white  hover:text-rose-500",
+                                                                    ? "text-yellow-300"
+                                                                    : "text-white  hover:text-yellow-200 ",
                                                                 "text-base font-medium px-4 "
                                                             )}
                                                             aria-current={item.current ? "page" : undefined}
+                                                            onClick={()=>{
+                                                                item.sub?setOpenSubMenu(!openSubMenu):""
+                                                            }}
                                                         >
                                                             {item.name}
                                                         </Link>
                                                         {
-                                                            item.sub ? <>
+                                                           ( item.sub && openSubMenu)? <>
                                                                 <div
-                                                                    className={"absolute top-10 right-0 hidden "}>
+                                                                    className={"absolute top-10 right-0 w-56"}>
                                                                     <ul className="border border-gray-200 rounded overflow-hidden shadow-md">
 
                                                                         {
                                                                             item.sub.map((subItem) => (
-                                                                                <li className="px-4 py-2 bg-white hover:bg-sky-100 hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">
+                                                                                <Link href={subItem.href}>
+                                                                                <li className="px-4 py-2 text-gray-800  bg-white hover:bg-gray-100 cursor-pointer hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">
                                                                                     {subItem.name}
 
                                                                                 </li>
+                                                                                </Link>
 
                                                                             ))
                                                                         }
@@ -129,8 +132,8 @@ export default function Nav(props:{bg:string}) {
                                                 href={item.href}
                                                 className={classNames(
                                                     item.current
-                                                        ? "text-rose-500 "
-                                                        : "text-white  ",
+                                                        ? "text-yellow-300 "
+                                                        : "text-gray-800  ",
                                                     "block py-4 text-base font-medium border-b border-neutral-200  text-right"
                                                 )}
                                                 aria-current={item.current ? "page" : undefined}
@@ -161,22 +164,7 @@ export default function Nav(props:{bg:string}) {
 
                                     )
                                 )}
-                                <div
-                                    className={"block py-4 text-base font-medium border-b border-neutral-200  text-center bg-rose-500 text-white mt-64"}>
-                                    <button>
-                                        <Link
-                                            href="https://github.com/humberni/halley"
-                                            target="_blank"
-                                            className=" block"
-                                        >
 
-                            <span className={""}>
-                                ورود
-
-                            </span>
-                                        </Link>
-                                    </button>
-                                </div>
                             </div>
                         </Disclosure.Panel>
                     </>

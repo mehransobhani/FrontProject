@@ -22,7 +22,7 @@ export default function ServiceTableRow(props: propsData) {
     const [edit, setEdit] = useState(false);
     const [error, setError] = useState(false);
     const [historyModal, setHistoryModal] = useState(false);
-    const [history, setHistory] = useState(undefined);
+    const [history, setHistory] = useState([]);
     const status:{open:string,close:string,"in-progress":string} = {
         "open": "باز",
         "close": "بسته",
