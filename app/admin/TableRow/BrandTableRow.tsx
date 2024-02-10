@@ -1,6 +1,7 @@
 "use client"
 import { Dispatch, SetStateAction, useState } from "react";
 import { editBrand } from "../api/BrandApi";
+import {JDate} from "@/app/admin/JDate/JDate";
 interface data {
     id: string,
     brand: string,
@@ -10,7 +11,8 @@ interface data {
 }
 interface propsData {
     data: data,
-    token:string|undefined
+    token:string|undefined,
+    index:number
 }
 
 export default function BrandTableRow(props: propsData) {
@@ -25,7 +27,7 @@ export default function BrandTableRow(props: propsData) {
     return (<>
         <tr className="text-center hover:bg-gray-100">
             <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4  text-blueGray-700 ">
-                {props.data.id}
+                {props.index+1}
             </th>
             <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 ">
                 {edit ? <input type={"text"} defaultValue={props.data.brand} onChange={(e)=>{setEditName(e.target.value)}}
@@ -37,18 +39,15 @@ export default function BrandTableRow(props: propsData) {
                 }
             </td>
             <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                {edit ? <input type={"text"} defaultValue={props.data.created_by}
-                    className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" />
-                    :
+
                     <span>
                         {props.data.created_by}
                     </span>
-                }
             </td>
             <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
 
                 <span>
-                    {props.data.created_date}
+                    {JDate(props.data.created_date)}
                 </span>
 
             </td>

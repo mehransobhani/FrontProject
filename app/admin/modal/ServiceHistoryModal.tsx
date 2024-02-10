@@ -1,3 +1,5 @@
+import {JDate} from "@/app/admin/JDate/JDate";
+
 interface prop {
     data: [propData],
     close:any
@@ -11,6 +13,12 @@ interface propData {
     user: string | null,
 }
 export default function ServiceHistoryModal(props: prop) {
+
+    const status:{open:string,close:string,"in-progress":string} = {
+        "open": "باز",
+        "close": "بسته",
+        "in-progress": "درحال بررسی",
+    }
 
     return (<>
         <div className="py-12 bg-gray-700 transition  bg-opacity-80 duration-150 ease-in-out z-50 fixed top-0 right-0 bottom-0 left-0 " id="modal">
@@ -57,13 +65,13 @@ export default function ServiceHistoryModal(props: prop) {
                                         <tr className="text-center">
 
                                             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
-                                                {item.timestamp ?? "-"}
+                                                {item.timestamp ?JDate(item.timestamp): "-"}
                                             </td>
                                             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
                                                 {item.user ?? "-"}
                                             </td>
                                             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
-                                                {item.status ?? "-"}
+                                                {status[item.status] ?? "-"}
                                             </td>
                                             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
                                                 {item.description ?? "-"}

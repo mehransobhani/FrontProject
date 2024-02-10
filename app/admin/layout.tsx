@@ -26,9 +26,9 @@ export default function AdminLayout({
         <html lang="en">
         <body className={myFont.className} style={{direction:"rtl"}}>
         <Sidebar />
-        <div className="relative md:mr-64 bg-blueGray-100">
+        <div className="relative md:mr-56 bg-blueGray-100">
             <AdminNavbar  />
-            {children} 
+            {children}
         </div>
         </body>
         </html>

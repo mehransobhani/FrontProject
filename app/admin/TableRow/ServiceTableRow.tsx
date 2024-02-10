@@ -2,6 +2,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import {getServiceHistory, updateService} from "../api/ServiceApi";
 import ServiceHistoryModal from "../modal/ServiceHistoryModal";
+import {JDate} from "@/app/admin/JDate/JDate";
 interface data {
     id: string,
     first_name: string,
@@ -59,6 +60,7 @@ export default function ServiceTableRow(props: propsData) {
     }
 
     const serviceStatus = props?.data?.status
+
     return (<>
         {
             historyModal && <ServiceHistoryModal data={history} close={() => { setHistoryModal(false) }} />
@@ -80,10 +82,7 @@ export default function ServiceTableRow(props: propsData) {
                 {props.data.last_name}
             </td>
 
-            <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
-                {props.data.id}
 
-            </td>
             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
                 {props.data.brand}
             </td>
@@ -109,7 +108,7 @@ export default function ServiceTableRow(props: propsData) {
             </td>
 
             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
-                {props.data.created_date}
+                {JDate(props.data.created_date)}
 
             </td>
             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold w-fit ">
@@ -125,7 +124,7 @@ export default function ServiceTableRow(props: propsData) {
                 }
             </td>
             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
-                {props.data.last_update}
+                {JDate(props.data.last_update)}
 
             </td>
             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
