@@ -24,16 +24,11 @@ export default function CreateBrandModal(props: props) {
             return;
         }
         try {
-            const newBrand: Response = await addBrand(brand, props.token);
-            console.log("NEW ", newBrand)
+            const newBrand = await addBrand(brand, props.token);
+            props.close();
 
-            if (newBrand.status != 200 && newBrand.status != 201) {
-                setResponseError(true);
-            } else {
-                props.close();
-            }
-        } catch (e) {
-            console.log("NEW 22 ", e)
+         
+        } catch (e) { 
 
             setResponseError(true);
         }

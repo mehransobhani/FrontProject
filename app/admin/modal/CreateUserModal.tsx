@@ -29,12 +29,18 @@ export default function CreateUserModal(props :props){
         let password=e.get("password");
         let password_confirmation=e.get("password_confirmation");
 
-
+        try{
         await addUser(first_name,
         last_name,
         phone,
         password,
         password_confirmation , props.token);
+        props.close();
+        }
+        catch(error)
+        {
+            setResponseError(true);
+        }
      }
 
 

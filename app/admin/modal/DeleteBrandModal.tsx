@@ -5,21 +5,20 @@ interface prop {
 }
 import { KeyIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
-import { resetPassword } from "../api/UserApi";
-export default function ResetPasswordModal(props: prop) {
+import { deleteBrand } from "../api/BrandApi";
+export default function DeleteBrandModal(props: prop) {
 
     const [responseError, setResponseError] = useState(false);
-    async function resetPasswordHandle(e: any) {
+    const [error, setError] = useState(false);
+    async function deleteBrandHandle() {
+
         try {
-            const response = await resetPassword(props.id, props.token);
+            const response = await deleteBrand(props.id, props.token);
             props.close();
-
         }
-        catch (error) {
-            setResponseError(true);
-
+        catch (e) {
+            setError(true);
         }
-
     }
 
 
@@ -34,15 +33,15 @@ export default function ResetPasswordModal(props: prop) {
                     <div className="mb-5">
                         <div>
                             <span className="font-bold text-gray-500">
-                                آیا از ریست رمزعبور کاربر اطمینان دارید ؟
+                                آیا از حذف برند اطمینان دارید ؟
                             </span>
                         </div>
                         {
-                            responseError ? <span className="font-bold text-red-500">خطایی در انجام عملیات پیش امد </span> : ""
+                            error ? <span className="font-bold text-red-500">خطایی در انجام عملیات پیش امد </span> : ""
                         }
                     </div>
                     <div className="flex items-center justify-start w-full">
-                        <button onClick={resetPasswordHandle}
+                        <button onClick={deleteBrandHandle}
                             className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">بله</button>
                         <button onClick={props.close}
                             className="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm" >انصراف</button>

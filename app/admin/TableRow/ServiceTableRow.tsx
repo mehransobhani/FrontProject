@@ -91,7 +91,7 @@ export default function ServiceTableRow(props: propsData) {
                 {edit ? <>
                     <select
                         onChange={(e)=>{setChangedStatus(e.target.value)}}
-                        className="w-[200px] border py-2 rounded-md  bg-transparent bg-none pl-4 pr-9 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+                        className="w-[200px] border py-2 rounded-md  bg-white bg-none pl-4 pr-9 text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
                         <option value={"open"} selected={props.data.status == "open"}>
                             باز
                         </option>

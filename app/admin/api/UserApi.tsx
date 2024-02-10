@@ -1,3 +1,5 @@
+"use server"
+import { revalidatePath } from "next/cache";
 
 export async function getUsers(token: string | undefined) {
     const response = await fetch(process.env.api_base_url + "user/users-list",
@@ -11,7 +13,7 @@ export async function getUsers(token: string | undefined) {
 }
 
 export async function addUser(first_name: FormDataEntryValue | null, last_name: FormDataEntryValue | null, phone: FormDataEntryValue | null, password: FormDataEntryValue | null, password_confirmation: FormDataEntryValue | null, token: string | undefined) {
-    const response = await fetch(process.env.api_base_url + "/user/signup/",
+    const response = await fetch(process.env.api_base_url + "user/signup/",
         {
             method: "POST",
             headers: {
@@ -28,8 +30,11 @@ export async function addUser(first_name: FormDataEntryValue | null, last_name: 
                 }
             )
         }
-    )
-    return response;
+    )  
+    if (response.status == 201)
+        revalidatePath("/admin/users")
+    else
+        return response;
 }
 
 export async function changeUserStatus(id: string | null, status: string | null, token: string | undefined) {
@@ -47,7 +52,10 @@ export async function changeUserStatus(id: string | null, status: string | null,
             )
         }
     )
-    return response;
+    if (response.status == 200)
+        revalidatePath("/admin/users")
+    else
+        return response;
 }
 
 
@@ -62,7 +70,10 @@ export async function resetPassword(id: string | null, token: string | undefined
 
         }
     )
-    return response;
+    if (response.status == 200)
+        revalidatePath("/admin/users")
+    else
+        return response;
 }
 
 interface userPass { username: string, password: "string" }

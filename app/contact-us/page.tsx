@@ -1,11 +1,14 @@
 import Image from "next/image";
 import ContactUsForm from "../component/ContactUsForm/ContactUsForm";
 import MainLayout from "@/app/Layout/MainLayout";
+import { brandList } from "../api/BrandsApi";
 
-export default function Home() {
+export default async function Home() {
+        const brands=await brandList(); 
+        
   return (<>
           <MainLayout>
-  <ContactUsForm />
+  <ContactUsForm brands={brands} />
           </MainLayout>
   </>
   );
