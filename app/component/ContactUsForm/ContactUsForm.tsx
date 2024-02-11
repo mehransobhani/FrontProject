@@ -1,9 +1,101 @@
-interface prop{
-    brands:[]
+"use client"
+import { AddressFormValidation, FnameFormValidation, LnameFormValidation, PhoneFormValidation, registerFormValidation } from "@/app/FormValidation/ServiceFormValidation";
+import { registerService } from "@/app/api/ServicesApi";
+import { log } from "console";
+import { useState } from "react";
+
+interface prop {
+    brands: []
 }
-export default function ContactUsForm(props:prop) {
-    console.log(props);
-    
+export default function ContactUsForm(props: prop) {
+
+    const [fNameEroor, setFNameError] = useState(undefined);
+    const [lNameEroor, setLNameError] = useState(undefined);
+    const [phoneEroor, setPhoneError] = useState(undefined);
+    const [addressEroor, setAddressError] = useState(undefined);
+    const [formError, setFormError] = useState(undefined);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(false);
+
+    function FNameValidationHandle(e: any) {
+        const fName: FormDataEntryValue | undefined = e.target.value;
+        try {
+            const validatedData = FnameFormValidation.parse({ fName })
+            setFNameError(undefined)
+        } catch (err: any) {
+            let error = JSON.parse(err.message);
+
+            setFNameError(error[0].message)
+            return;
+        }
+    }
+
+    function LNameValidationHandle(e: any) {
+        const lName: FormDataEntryValue | undefined = e.target.value;
+        try {
+            const validatedData = LnameFormValidation.parse({ lName })
+            setLNameError(undefined)
+        } catch (err: any) {
+            let error = JSON.parse(err.message);
+            setLNameError(error[0].message)
+            return;
+        }
+    }
+
+    function PhoneValidationHandle(e: any) {
+        const phone: FormDataEntryValue | undefined = e.target.value;
+        try {
+            const validatedData = PhoneFormValidation.parse({ phone })
+            setPhoneError(undefined)
+        } catch (err: any) {
+            let error = JSON.parse(err.message);
+            setPhoneError(error[0].message)
+            return;
+        }
+    }
+
+    function addressValidationHandle(e: any) {
+        const address: FormDataEntryValue | undefined = e.target.value;
+        try {
+            const validatedData = AddressFormValidation.parse({ address })
+            setAddressError(undefined)
+        } catch (err: any) {
+            let error = JSON.parse(err.message);
+            setAddressError(error[0].message)
+            return;
+        }
+    }
+
+    async function registerForm(e: any) {
+        let fName = e.get("fname");
+        let lName = e.get("lname");
+        let phone = e.get("phone");
+        let address = e.get("address");
+        let brand = e.get("brand");
+setError(false);
+setSuccess(false);
+        try {
+            const validatedData = registerFormValidation.parse({ fName, lName, phone, address })
+            setFormError(undefined)
+        } catch (err: any) {
+            let error = JSON.parse(err.message);
+            console.log(error);
+
+            setFormError(error)
+            return;
+        }
+
+        let registerData = await registerService(fName, lName, phone, brand, address);
+        if (registerData.status == 201) {
+            setSuccess(true)
+            let data = registerData.json();
+            console.log("Status", data);
+        }
+        else{
+            setError(true); 
+        }
+    }
+
     return (
         <>
             <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
@@ -17,84 +109,139 @@ export default function ContactUsForm(props:prop) {
                         تماس باما و درخواست ارسال تعمیرکار
                     </h2>
 
+                    {success ? <div
+                        className="p-2 mb-3 text-sm text-green-800 rounded-lg bg-green-50  mt-5"
+                        role="alert">
+                        درخواست با موفقیت ثبت شد، همکاران ما در اسرع وقت با شما تماس خواهند گرفت
+                    </div> : ""}
+                    {error ? <div
+                        className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  mt-5"
+                        role="alert">
+                            مشکلی در ثبت درخواست پیش آمد
+                     </div> : ""}
                 </div>
-                <form action="#" method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
+                <form action={registerForm} method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
                     <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 
                         <div className="sm:col-span-2">
-                            <label htmlFor="company"
-                                   className="block text-sm font-semibold leading-6 text-black">
-                                نام و نام خانوادگی
+                            <label htmlFor="fname"
+                                className="block text-sm font-semibold leading-6 text-black">
+                                نام
                                 <span className={"text-red-500 px-2"}>*</span>
 
                             </label>
 
                             <div className="mt-2.5">
-                            <input type="text" name="company" id="company" autoComplete="organization"
-                                       className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-sky-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"/>
+                                <input type="text" name="fname" id="fname" autoComplete="organization"
+                                    onBlur={FNameValidationHandle}
+                                    className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-sky-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" />
+                                {fNameEroor ? <div
+                                    className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
+                                    role="alert">
+                                    {fNameEroor}
+                                </div> : ""}
                             </div>
                         </div>
                         <div className="sm:col-span-2">
-                            <label htmlFor="company"
-                                   className="block text-sm font-semibold leading-6 text-black">
+                            <label htmlFor="lname"
+                                className="block text-sm font-semibold leading-6 text-black"> نام خانوادگی
+                                <span className={"text-red-500 px-2"}>*</span>
+
+                            </label>
+                            <div className="mt-2.5">
+                                <input type="text" name="lname" id="lname" autoComplete="organization"
+                                    onBlur={LNameValidationHandle}
+                                    className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-sky-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" />
+                                {lNameEroor ? <div
+                                    className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
+                                    role="alert">
+                                    {lNameEroor}
+                                </div> : ""}
+                            </div>
+                        </div>
+                        <div className="sm:col-span-2">
+                            <label htmlFor="phone"
+                                className="block text-sm font-semibold leading-6 text-black">
                                 شماره موبایل
                                 <span className={"text-red-500 px-2"}>*</span>
                             </label>
                             <div className="mt-2.5">
-                            <input type="text" name="company" id="company" autoComplete="organization"
-                                       className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-sky-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"/>
+                                <input type="text" name="phone" id="phone" autoComplete="organization"
+                                    onBlur={PhoneValidationHandle}
+
+                                    className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-sky-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" />
+                                {phoneEroor ? <div
+                                    className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
+                                    role="alert">
+                                    {phoneEroor}
+                                </div> : ""}
+                            </div>
+
+
+                            <div className="sm:col-span-2">
+                                <label htmlFor="brand"
+                                    className="block text-sm font-semibold leading-6 text-black">برند
+                                    <span className={"text-red-500 px-2"}>*</span>
+
+                                </label>
+                                <div className="mt-2.5">
+                                    <select name="brand" className="p-2 mb-5 mt-2 bg-white text-gray-600 focus:outline-none focus:border focus:border-sky-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" >
+                                        {props.brands && props.brands.map((item) => {
+                                            return (<>
+                                                <option value={item}>
+                                                    {item}
+                                                </option>
+                                            </>)
+                                        })}
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div className="sm:col-span-2">
+                                <label htmlFor="address"
+                                    className="block text-sm font-semibold leading-6 text-gray-900">
+                                    ادرس :
+                                    <span className={"text-red-500 px-2"}>*</span>
+
+                                </label>
+                                <div className="mt-2.5">
+                                    <textarea name="address" id="address"
+                                        onBlur={addressValidationHandle}
+
+                                        className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-sky-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"></textarea>
+
+
+                                </div>
+                                {addressEroor ? <div
+                                    className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
+                                    role="alert">
+                                    {addressEroor}
+                                </div> : ""}
+
+
                             </div>
                         </div>
-                        <div className="sm:col-span-2">
-                            <label htmlFor="company"
-                                   className="block text-sm font-semibold leading-6 text-black">آدرس
-                                <span className={"text-red-500 px-2"}>*</span>
 
-                            </label>
-                            <div className="mt-2.5">
-                            <input type="text" name="company" id="company" autoComplete="organization"
-                                       className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-sky-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"/>
-                            </div>
-                        </div>
-
-                        <div className="sm:col-span-2">
-                            <label htmlFor="company"
-                                   className="block text-sm font-semibold leading-6 text-black">برند
-                                <span className={"text-red-500 px-2"}>*</span>
-
-                            </label>
-                            <div className="mt-2.5">
-                            <select name="brand" className="p-2 mb-5 mt-2 bg-white text-gray-600 focus:outline-none focus:border focus:border-sky-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" >
-                                    {props.brands && props.brands.map((item)=>{
-                                        return(<>
-                                        <option value={item}>
-                                            {item}
-                                        </option>
-                                        </>)
-                                    })}
-                                </select>
-                            </div>
-                        </div>
-
-
-                        <div className="sm:col-span-2">
-                            <label htmlFor="message"
-                                   className="block text-sm font-semibold leading-6 text-gray-900">
-                                توضیحات خود را بنویسید:
-                                <span className={"text-red-500 px-2"}>*</span>
-
-                            </label>
-                            <div className="mt-2.5">
-                                <textarea name="message" id="message"
-                                          className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-sky-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"></textarea>
-                            </div>
-                        </div>
-                     </div>
-                    <div className="mt-10">
-                        <button type="submit"
+                        <div className="mt-10">
+                            <button type="submit"
                                 className="block w-full rounded-md bg-sky-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-sky-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                            ارسال
-                        </button>
+                                ارسال
+                            </button>
+                        </div>
+
+
+                    </div>
+                    <div className="my-5">
+                        {formError ? formError.map((item) => {
+                            return <>
+                                <div
+                                    className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
+                                    role="alert">
+                                    {item.message}
+                                </div>
+                            </>
+                        }) : ""}
                     </div>
                 </form>
             </div>

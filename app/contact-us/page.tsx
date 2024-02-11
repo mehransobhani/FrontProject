@@ -8,7 +8,7 @@ export default async function Home() {
         
   return (<>
           <MainLayout>
-  <ContactUsForm brands={brands} />
+              <ContactUsForm brands={brands} />
           </MainLayout>
   </>
   );
