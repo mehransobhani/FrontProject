@@ -131,7 +131,8 @@ export default function CreateUserModal(props :props){
                                 {phoneValidationError}
                             </div> : ""}
                         <label   className="text-gray-800 text-sm font-bold leading-tight tracking-normal">  رمز عبور  </label>
-                        <input onBlur={PasswordValidationHandle} className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="کلمه عیور"  name="password"/>
+                        <input onBlur={PasswordValidationHandle} type="password"
+                        className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="کلمه عیور"  name="password"/>
                             {passwordValidationError ? <div
                                 className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
                                 role="alert">
@@ -139,12 +140,13 @@ export default function CreateUserModal(props :props){
                             </div> : ""}
 
                         <label   className="text-gray-800 text-sm font-bold leading-tight tracking-normal">تایید رمز عبور  </label>
-                        <input className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder=" تکرار کلمه عیور"  name="password_confirmation"/>
+                        <input type="password"
+                         className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder=" تکرار کلمه عیور"  name="password_confirmation"/>
 
 
                         <div className="flex items-center justify-start w-full">
-                            <button type="submit" className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">ایجاد</button>
-                            <button className="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"  onClick={props.close}>انصراف</button>
+                            <button type="submit" className="mx-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">ایجاد</button>
+                            <button className="mx-1 focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"  onClick={props.close}>انصراف</button>
                         </div>
                         </form>
                         <button className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600"  aria-label="close modal" role="button" onClick={props.close}>

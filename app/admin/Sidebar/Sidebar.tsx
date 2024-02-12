@@ -1,17 +1,12 @@
 "use client"
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {Bars4Icon} from "@heroicons/react/24/solid";
 import {XMarkIcon} from "@heroicons/react/24/solid";
- export default  async function Sidebar(props:{token:string|undefined , role:string}) {
-    const [collapseShow, setCollapseShow] = React.useState("hidden");
-    const [role, setRole] = React.useState("");
-    const pathname = usePathname();
-
-
-
-     console.log("CON",role=="super-admin")
+ export default   function Sidebar(props:{token:string|undefined , role:string}) {
+    const [collapseShow, setCollapseShow] =  useState("hidden");
+     const pathname = usePathname(); 
      return (<>
         <nav
             className="md:right-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-[#445861]  flex flex-wrap items-center justify-between relative md:w-56 z-10 py-4 px-6">

@@ -22,8 +22,7 @@ export async function middleware(request: NextRequest) {
 
         if (request.url.match("/auth/login")) {
             return NextResponse.redirect(new URL('/admin/services', request.url))
-        }
-
+        } 
     }
 }
 

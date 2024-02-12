@@ -35,7 +35,7 @@ export default function BrandTable(props:prop) {
 
                     </div>
                     <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right my-3">
-                        <button className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase p-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={()=>{setModal(true)}}> افزودن جدید  </button>
+                        <button className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase p-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" onClick={()=>{setModal(true)}}>ایجاد برند</button>
                     </div>
                 </div>
 

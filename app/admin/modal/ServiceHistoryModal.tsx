@@ -17,7 +17,7 @@ export default function ServiceHistoryModal(props: prop) {
     const status:{open:string,close:string,"in-progress":string} = {
         "open": "باز",
         "close": "بسته",
-        "in-progress": "درحال بررسی",
+        "in-progress": "درحال انجام",
     }
 
     return (<>
@@ -73,7 +73,7 @@ export default function ServiceHistoryModal(props: prop) {
                                             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
                                                 {status[item.status] ?? "-"}
                                             </td>
-                                            <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
+                                            <td className="px-6 bg-blueGray-50 w-60 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0  font-semibold ">
                                                 {item.description ?? "-"}
                                             </td>
                                         </tr>

@@ -106,7 +106,7 @@ setSuccess(false);
                 </div>
                 <div className="mx-auto max-w-2xl text-center">
                     <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                        تماس باما و درخواست ارسال تعمیرکار
+                        تماس با ما و درخواست ارسال تعمیرکار
                     </h2>
 
                     {success ? <div
@@ -207,9 +207,8 @@ setSuccess(false);
                                 </label>
                                 <div className="mt-2.5">
                                     <textarea name="address" id="address"
-                                        onBlur={addressValidationHandle}
-
-                                        className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-sky-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"></textarea>
+                                        onBlur={addressValidationHandle} 
+                                        className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-sky-600 font-normal w-full h-40 flex items-center pl-3 text-sm border-gray-300 rounded border"></textarea>
 
 
                                 </div>

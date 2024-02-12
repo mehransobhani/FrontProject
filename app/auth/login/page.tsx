@@ -42,26 +42,26 @@ export default async function login
                                 <UserCircleIcon/>
                             </div>
                             <h1 className="mb-2 text-2xl">پنل مدیریت</h1>
-                            <span className=" font-bold text-gray-500">برای ورود نام و کلمه عبور خود را وارد کنید</span>
+                            <span className=" font-bold text-gray-500">برای ورود  موبایل و کلمه عبور خود را وارد کنید</span>
                             { searchParams.find && searchParams.find==0 &&
 
                                 <div
                                     className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
                                     role="alert">
-                                    نام کاربری یا کلمه عبور اشتباه است
+                                    شماره موبایل یا کلمه عبور اشتباه است
                                 </div>
                             }
                         </div>
                         <form action={login}>
                             <div className="mb-4 text-lg">
                                 <input
-                                    className="rounded-3xl border-none bg-indigo-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-gray-800 shadow-lg outline-none backdrop-blur-md"
-                                    type="text" name="phone" placeholder="نام کاربری"/>
+                                    className="rounded-3xl border-none bg-indigo-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-gray-800  outline-none backdrop-blur-md"
+                                    type="text" name="phone" placeholder="شماره موبایل"/>
                             </div>
 
                             <div className="mb-4 text-lg">
                                 <input
-                                    className="rounded-3xl border-none bg-indigo-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-gray-800 shadow-lg outline-none backdrop-blur-md"
+                                    className="rounded-3xl border-none bg-indigo-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-gray-800  outline-none backdrop-blur-md"
                                     type="Password" name="password" placeholder="کلمه عبور"/>
                             </div>
 
