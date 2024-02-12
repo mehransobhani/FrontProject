@@ -36,7 +36,6 @@ export default function ServiceTableRow(props: propsData) {
     async function showHistory(id: string) {
         const serviceHistory = await getServiceHistory(id , props.token);
         setHistoryModal(true);
-        console.log(serviceHistory);
         setHistory(serviceHistory);
 
     }
@@ -61,6 +60,7 @@ export default function ServiceTableRow(props: propsData) {
 
     const serviceStatus = props?.data?.status
 
+    console.log(props.data);
     return (<>
         {
             historyModal && <ServiceHistoryModal data={history} close={() => { setHistoryModal(false) }} />
@@ -78,9 +78,7 @@ export default function ServiceTableRow(props: propsData) {
                 {props.data.last_name}
 
             </td>
-            <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
-                {props.data.last_name}
-            </td>
+
 
 
             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">

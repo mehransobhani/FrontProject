@@ -2,22 +2,28 @@ import {UserCircleIcon} from "@heroicons/react/24/outline";
 import {loginApi} from "@/app/auth/api/LoginApi";
 import {cookies} from "next/headers";
 import {redirect} from "next/navigation";
-import {LoginFormValidation} from "@/app/admin/FormValidation/FormValidation";
 
-export default async function login() {
+export default async function login
+({
+     params,
+     searchParams,
+ }: {
+    params: { slug: string };
+    searchParams?: { [key: string]: string | string[] | undefined };
+})
+{
+
     async function login(e: FormData) {
         "use server"
-
-
         let username: FormDataEntryValue | null = e.get("phone");
         let password: FormDataEntryValue | null = e.get("password");
 
         let data = await loginApi(username, password);
         if (data.access) {
             cookies().set("access-token", data.access);
-            redirect("/admin/users");
+            redirect("/admin/services");
         } else {
-            console.log("USER NOT FOUND")
+            redirect("/auth/login?find=0");
         }
     }
 
@@ -37,11 +43,13 @@ export default async function login() {
                             </div>
                             <h1 className="mb-2 text-2xl">پنل مدیریت</h1>
                             <span className=" font-bold text-gray-500">برای ورود نام و کلمه عبور خود را وارد کنید</span>
-                            {
-                                // <div
-                                //     className="font-regular relative   block w-full rounded-lg p-4 text-red-500 text-base leading-5   opacity-100">
-                                //     نام کاربری یا کلمه عبور اشتباه است
-                                // </div>
+                            { searchParams.find && searchParams.find==0 &&
+
+                                <div
+                                    className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
+                                    role="alert">
+                                    نام کاربری یا کلمه عبور اشتباه است
+                                </div>
                             }
                         </div>
                         <form action={login}>

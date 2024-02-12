@@ -1,6 +1,6 @@
 
 import ProfileDropDown from "@/app/admin/Navbar/ProfileDropDown";
- export default function AdminNavbar() {
+ export default function AdminNavbar(props:{token:string|undefined}) {
 
 
     return (
@@ -14,7 +14,7 @@ import ProfileDropDown from "@/app/admin/Navbar/ProfileDropDown";
                             <span className="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-300  bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
                                 <i className="fas fa-search"></i>
                             </span>
-                            <ProfileDropDown />
+                            <ProfileDropDown token={props.token}/>
                          </div>
                     </form>
                     <ul className="flex-col md:flex-row list-none items-center hidden md:flex">

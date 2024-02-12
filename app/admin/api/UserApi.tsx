@@ -1,5 +1,6 @@
 "use server"
 import { revalidatePath } from "next/cache";
+import {cookies} from "next/headers";
 
 export async function getUsers(token: string | undefined) {
     const response = await fetch(process.env.api_base_url + "user/users-list",
@@ -30,11 +31,11 @@ export async function addUser(first_name: FormDataEntryValue | null, last_name: 
                 }
             )
         }
-    )  
+    )
     if (response.status == 201)
         revalidatePath("/admin/users")
     else
-        return response;
+        return response.json();
 }
 
 export async function changeUserStatus(id: string | null, status: string | null, token: string | undefined) {
@@ -76,21 +77,38 @@ export async function resetPassword(id: string | null, token: string | undefined
         return response;
 }
 
-interface userPass { username: string, password: "string" }
-export async function login() {
-    const response = await fetch(process.env.api_base_url + "user/login/",
+
+
+export async function changePassword(old_password: string | null, password: string | null, confirm_pass: string | null, token: string | undefined) {
+    console.log(old_password)
+    const response = await fetch(process.env.api_base_url + "user/change-password/",
         {
-            method: "POST",
+            method: "PATCH",
             headers: {
-                'Content-type': 'application/json',
+                "Content-Type": "application/json",
+                "Authorization": 'Bearer ' + token
             },
             body: JSON.stringify({
-                phone: "09121111111",
-                password: "qwerty123@@"
+                password:password,
+                confirm_pass:confirm_pass,
+                old_password:old_password,
             })
-
         }
     )
-    return response.json();
 
+    return response.json()
+}
+
+
+export async function me(token:string|undefined="") {
+    const response = await fetch(process.env.api_base_url + "user/me/",
+        {
+            method: "GET",
+            headers: {
+                'Content-type': 'application/json',
+                "Authorization": 'Bearer '+ token
+            }
+        }
+    )
+    return  response.json();
 }

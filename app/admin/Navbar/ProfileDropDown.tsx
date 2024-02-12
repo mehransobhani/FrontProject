@@ -3,12 +3,17 @@ import {useState} from "react";
 import profile from "@/public/icon/profile.jpg"
 import Image from "next/image";
 import Link from "next/link";
+import ChangePasswordModal from "@/app/admin/modal/ChangePasswordModal";
 
-export default function ProfileDropDown(props: any) {
+export default function ProfileDropDown(props: {token:string|undefined}) {
     const [show, setShow] = useState(false);
-
-    return (
+    const [changePasswordModal, setChangePasswordModal] = useState(false);
+     return (
         <>
+
+            {
+                changePasswordModal && <ChangePasswordModal close={()=>setChangePasswordModal(false)} token={props.token}/>
+            }
             <div className="w-12 h-12 bg-gray-300 rounded-full cursor-pointer mr-3" onClick={() => {
                 setShow(!show)
             }}>
@@ -18,7 +23,9 @@ export default function ProfileDropDown(props: any) {
                     <div className="py-2 p-2" role="menu" aria-orientation="vertical"
                          aria-labelledby="dropdown-button">
 
-                        <a className="flex block rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer"
+                        <button
+                            onClick={()=>setChangePasswordModal(true)}
+                            className="flex block rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 active:bg-blue-100 cursor-pointer"
                            role="menuitem">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16px" className="mr-2"
                                  viewBox="0 0 32 32" id="desktop">
@@ -28,8 +35,8 @@ export default function ProfileDropDown(props: any) {
                             <span className="px-3">
                                                 ویرایش کلمه عبور
                                             </span>
-                        </a>
-                        
+                        </button>
+
                     </div>
                 </div> : ""}
             </div>
