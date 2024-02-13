@@ -1,4 +1,4 @@
-export async function registerService(fName: FormDataEntryValue | null, lname: FormDataEntryValue | null, phone: FormDataEntryValue | null, brand: FormDataEntryValue | null, address: FormDataEntryValue | null) {
+export async function registerService(fName: FormDataEntryValue |string| null, lname: FormDataEntryValue|string | null, phone: FormDataEntryValue |string| null, brand: FormDataEntryValue|string | null, address: FormDataEntryValue |string| null) {
     const response = await fetch(process.env.api_base_url + "service/create-service/",
         {
             method: 'POST',

@@ -17,8 +17,10 @@ interface data {
 }
 interface propsData {
     data: data,
+    change: any,
     token:string|undefined,
     index:number
+    page:number
 }
 
 export default function ServiceTableRow(props: propsData) {
@@ -50,7 +52,8 @@ export default function ServiceTableRow(props: propsData) {
             const update = await updateService(id, status, description, props.token);
             toast.success("سرویس با موفقیت ویرایش شد ")
            setEdit(false)
-
+           if(props.page>1)
+           props.change(props.page);
         }
         catch (e)
         {

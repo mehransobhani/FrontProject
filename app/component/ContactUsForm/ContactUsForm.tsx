@@ -22,7 +22,7 @@ export default function ContactUsForm(props: prop) {
     const [phoneEroor, setPhoneError] = useState(undefined);
     const [addressEroor, setAddressError] = useState(undefined);
 
-    function FNameValidationHandle(e: any) {
+    const p2e = (s: string): string => s.replace(/[۰-۹]/g, (d: string) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d).toString());    function FNameValidationHandle(e: any) {
         const fName: FormDataEntryValue | undefined = e.target.value;
         try {
             const validatedData = FnameFormValidation.parse({fName})
@@ -75,7 +75,7 @@ export default function ContactUsForm(props: prop) {
 
         let fName = e.get("fname");
         let lName = e.get("lname");
-        let phone = e.get("phone");
+        let phone = p2e(e.get("phone"));
         let address = e.get("address");
         let brand = e.get("brand");
         try {

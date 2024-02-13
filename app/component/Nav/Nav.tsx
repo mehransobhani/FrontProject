@@ -31,7 +31,7 @@ export default function Nav() {
             sub: [  {
                 name: "درخواست پشتیبانی آنلاین",
                 href: "contact-us",
-                current: false
+                current: pathName=="/contact-us"
             } ]
         },
         {name: "تماس با ما", href: "contact-us", current:  pathName=="/contact-us", sub: null},
@@ -82,8 +82,14 @@ export default function Nav() {
 
                                                                         {
                                                                             item.sub.map((subItem) => (
-                                                                                <Link href={subItem.href}>
-                                                                                <li className="px-4 py-2 text-gray-800  bg-white hover:bg-gray-100 cursor-pointer hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">
+                                                                                <Link
+                                                                                    className={classNames(
+                                                                                        subItem.current
+                                                                                            ? "text-yellow-600"
+                                                                                            : "text-gray-800 ",
+                                                                                     )}
+                                                                                    href={subItem.href}>
+                                                                                <li className="px-4 py-2  bg-white hover:bg-gray-100 cursor-pointer hover:text-sky-900 border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out">
                                                                                     {subItem.name}
 
                                                                                 </li>
@@ -132,7 +138,7 @@ export default function Nav() {
                                                 href={item.href}
                                                 className={classNames(
                                                     item.current
-                                                        ? "text-yellow-300 "
+                                                        ? "text-yellow-600 "
                                                         : "text-gray-800  ",
                                                     "block py-4 text-base font-medium border-b border-neutral-200  text-right"
                                                 )}
@@ -148,8 +154,8 @@ export default function Nav() {
                                                         as="a"
                                                         href={subItem.href}
                                                         className={classNames(
-                                                            item.current
-                                                                ? "text-rose-500 "
+                                                            subItem.current
+                                                                ? "text-yellow-600"
                                                                 : "text-neutral-700  ",
                                                             "block py-4  pr-10 text-base font-medium border-b border-neutral-200  text-right"
                                                         )}

@@ -3,7 +3,7 @@ import {CursorArrowRaysIcon} from "@heroicons/react/24/solid";
 import Link from "next/link";
 import sony from "@/public/icon/sonyLogo.png"
 import xvision from "@/public/icon/xvisionLogo.png"
-import tcl from "@/public/icon/TlcLogo.png"
+import tcl from "@/public/icon/TclLogo.png"
 import Image from "next/image";
 
 export default function Hero() {

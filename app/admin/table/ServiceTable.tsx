@@ -1,5 +1,8 @@
+"use client"
 import ServiceTableRow from "../TableRow/ServiceTableRow"
-
+import Pagination from "@/app/admin/pagination/Pagination";
+import {useState} from "react";
+import {getServicesPagination} from "@/app/admin/api/ServiceApi";
 interface propsData {
     id: string,
     first_name: string,
@@ -21,6 +24,24 @@ interface prop {
     token:string|undefined
 }
 export default function ServiceTable(props: prop) {
+const [page , setPage]=useState(1);
+const [hasMore , setHasMore]=useState(props.data.next?true:false);
+const [response , setResponse]=useState(undefined);
+async function changePageHandle(pages:number=page){
+   let data=await getServicesPagination(pages,props.token);
+   setResponse(data);
+    setPage(pages);
+
+    if(data.next)
+    {
+        setHasMore(true);
+    }
+    else {
+        setHasMore(false);
+    }
+}
+
+
 
     return (<>
         <div className="w-full mb-12 xl:mb-0 px-4 mx-auto mt-24">
@@ -80,16 +101,33 @@ export default function ServiceTable(props: prop) {
 
                         <tbody>
                             {
-                                props.data.results.map((data , index) => {
+                              !response ?  props.data.results.map((data , index) => {
                                     return (<>
-                                        <ServiceTableRow index={index} data={data} token={props.token} />
+                                        <ServiceTableRow index={index} data={data} token={props.token} change={changePageHandle}  page={page} />
 
                                     </>)
                                 })
+                                  :response.results ?response.results.map((data , index) => {
+                                      return (<>
+                                          <ServiceTableRow index={index} data={data} token={props.token} change={changePageHandle}  page={page}/>
+
+                                      </>)
+                                  }):""
+
                             }
                         </tbody>
 
                     </table>
+
+                    <Pagination
+                        page={page}
+                        hasMore={hasMore}
+                                nextPage={()=> {
+                        changePageHandle(page + 1)
+                                }}
+                                previousPage={()=> {
+                        changePageHandle(page-1)
+                    }} />
                 </div>
             </div>
         </div>

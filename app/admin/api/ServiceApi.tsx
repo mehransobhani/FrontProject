@@ -11,6 +11,15 @@ export async function getServices(token:string|undefined) {
     return response.json();
 }
 
+export async function getServicesPagination(page:number,token:string|undefined) {
+    const response = await fetch(process.env.api_base_url + "service/service-list/?page="+page,
+        {
+            headers: {
+                "Authorization": 'Bearer '+token
+            }
+        })
+    return response.json();
+}
 
  export async function getServiceHistory(id:string|undefined,token:string|undefined) {
     const response = await fetch(process.env.api_base_url + "service/service-history/"+id,

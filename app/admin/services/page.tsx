@@ -1,7 +1,6 @@
 import ServiceTable from "../table/ServiceTable";
 import { getServices } from "../api/ServiceApi";
 import {cookies} from "next/headers";
-import moment from "jalali-moment";
 
 export default async function Home() {
 
@@ -13,6 +12,7 @@ export default async function Home() {
     return (
         <main className="flex min-h-screen flex-col items-center justify-between py-12 px-4 bg-slate-50 text-blue-950">
             <ServiceTable data={data} token={token}  />
+
         </main>
     );
 }
