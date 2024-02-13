@@ -1,4 +1,4 @@
- import {getUsers, login} from "../api/UserApi";
+ import {getUsers} from "../api/UserApi";
 import CustomerTable from "../table/CustomerTable";
  import {cookies} from "next/headers";
 

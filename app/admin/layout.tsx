@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "../globals.css";
+ import "../globals.css";
 import AdminNavbar from "@/app/admin/Navbar/AdminNavbar";
 import Sidebar from "@/app/admin/Sidebar/Sidebar";
 import localFont from 'next/font/local'
@@ -9,6 +8,7 @@ import {cookies} from "next/headers";
 import {me} from "@/app/admin/api/UserApi";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import {redirect} from "next/navigation";
 
 const myFont:NextFont = localFont({ src: '../../public/font/Vazirmatn-Regular.woff2' })
 export const metadata: Metadata = {
@@ -30,12 +30,18 @@ export default function AdminLayout({
 }>) {
 
 
+ async function logout(){
+     "use server"
+     cookies().delete("access-token");
+     redirect("/auth/login")
+
+}
     return (
         <html lang="en">
         <body className={myFont.className} style={{direction:"rtl"}}>
         <Sidebar  token={token} role={role}/>
         <div className="relative md:mr-56 bg-blueGray-100">
-            <AdminNavbar  token={token}/>
+            <AdminNavbar  token={token} logout={logout}/>
             <ToastContainer  rtl={true} position={"top-center"}  />
 
             {children}

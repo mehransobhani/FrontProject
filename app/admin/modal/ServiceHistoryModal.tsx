@@ -8,13 +8,13 @@ interface prop {
 interface propData {
     description: string | null,
     service: string | null,
-    status: string | null,
+    status: string ,
     timestamp: string | null,
     user: string | null,
 }
 export default function ServiceHistoryModal(props: prop) {
 
-    const status:{open:string,close:string,"in-progress":string} = {
+    const status:{"open":string,"close":string,"in-progress":string} = {
         "open": "باز",
         "close": "بسته",
         "in-progress": "درحال انجام",

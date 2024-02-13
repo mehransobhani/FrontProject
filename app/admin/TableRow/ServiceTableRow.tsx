@@ -49,6 +49,7 @@ export default function ServiceTableRow(props: propsData) {
        try {
             const update = await updateService(id, status, description, props.token);
             toast.success("سرویس با موفقیت ویرایش شد ")
+           setEdit(false)
 
         }
         catch (e)
