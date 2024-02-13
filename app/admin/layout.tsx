@@ -7,7 +7,8 @@ import localFont from 'next/font/local'
 import {NextFont} from "next/dist/compiled/@next/font";
 import {cookies} from "next/headers";
 import {me} from "@/app/admin/api/UserApi";
-
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const myFont:NextFont = localFont({ src: '../../public/font/Vazirmatn-Regular.woff2' })
 export const metadata: Metadata = {
@@ -35,6 +36,8 @@ export default function AdminLayout({
         <Sidebar  token={token} role={role}/>
         <div className="relative md:mr-56 bg-blueGray-100">
             <AdminNavbar  token={token}/>
+            <ToastContainer  rtl={true} position={"top-center"}  />
+
             {children}
         </div>
         </body>

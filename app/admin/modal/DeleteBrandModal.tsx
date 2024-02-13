@@ -1,3 +1,5 @@
+import {toast} from "react-toastify";
+
 interface prop {
     id: string,
     token: string | undefined,
@@ -9,15 +11,18 @@ import { deleteBrand } from "../api/BrandApi";
 export default function DeleteBrandModal(props: prop) {
 
     const [responseError, setResponseError] = useState(false);
-    const [error, setError] = useState(false);
-    async function deleteBrandHandle() {
+     async function deleteBrandHandle() {
 
         try {
             const response = await deleteBrand(props.id, props.token);
+            toast.success("برند با موفقیت حذف شد ")
             props.close();
+
+
         }
         catch (e) {
-            setError(true);
+            toast.error("خطایی در حذف برند پیش آمد ")
+
         }
     }
 
@@ -36,9 +41,7 @@ export default function DeleteBrandModal(props: prop) {
                                 آیا از حذف برند اطمینان دارید ؟
                             </span>
                         </div>
-                        {
-                            error ? <span className="font-bold text-red-500">خطایی در انجام عملیات پیش امد </span> : ""
-                        }
+
                     </div>
                     <div className="flex items-center justify-start w-full">
                         <button onClick={deleteBrandHandle}

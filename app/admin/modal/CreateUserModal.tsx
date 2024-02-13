@@ -13,10 +13,10 @@ import {
     UserPasswordValidation,
     UserPhoneValidation
 } from "@/app/admin/FormValidation/UserFormValidation";
+import {toast} from "react-toastify";
 export default function CreateUserModal(props :props){
 
-    const [responseError, setResponseError] = useState(false);
-    const [passwordValidationError, setPasswordValidationError] = useState(undefined);
+     const [passwordValidationError, setPasswordValidationError] = useState(undefined);
     const [firstNameValidationError, setFirstNameValidationError] = useState(undefined);
     const [lastNameValidationError, setLastNameValidationError] = useState(undefined);
     const [phoneValidationError, setPhoneValidationError] = useState(undefined);
@@ -35,20 +35,19 @@ export default function CreateUserModal(props :props){
         phone,
         password,
         password_confirmation , props.token);
+       toast.success("کاربر با موفقیت ایجاد شد")
         props.close();
 
         }
         catch(error)
         {
-            console.log(error)
-            setResponseError(true);
-        }
+            toast.error("خطایی در ایجاد کاربر پیش آمد ")
+         }
      }
 
 
     function PasswordValidationHandle(e: any) {
-        setResponseError(false)
-        const password: FormDataEntryValue | undefined = e.target.value;
+         const password: FormDataEntryValue | undefined = e.target.value;
         try {
             const validatedData = UserPasswordValidation.parse({password})
             setPasswordValidationError(undefined)
@@ -61,8 +60,7 @@ export default function CreateUserModal(props :props){
 
 
     function FirstNameValidationHandle(e: any) {
-        setResponseError(false)
-        const first_name: FormDataEntryValue | undefined = e.target.value;
+         const first_name: FormDataEntryValue | undefined = e.target.value;
         try {
             const validatedData = UserFirstNameValidation.parse({first_name})
             setFirstNameValidationError(undefined)
@@ -76,8 +74,7 @@ export default function CreateUserModal(props :props){
 
 
     function LastNameValidationHandle(e: any) {
-        setResponseError(false)
-        const last_name: FormDataEntryValue | undefined = e.target.value;
+         const last_name: FormDataEntryValue | undefined = e.target.value;
         try {
             const validatedData = UserLastNameValidation.parse({last_name})
             setLastNameValidationError(undefined)
@@ -88,8 +85,7 @@ export default function CreateUserModal(props :props){
         }
     }
     function PhoneValidationHandle(e: any) {
-        setResponseError(false)
-        const phone: FormDataEntryValue | undefined = e.target.value;
+         const phone: FormDataEntryValue | undefined = e.target.value;
         try {
             const validatedData = UserPhoneValidation.parse({phone})
             setPhoneValidationError(undefined)

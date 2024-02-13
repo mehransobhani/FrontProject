@@ -34,8 +34,9 @@ export async function addUser(first_name: FormDataEntryValue | null, last_name: 
     )
     if (response.status == 201)
         revalidatePath("/admin/users")
-    else
-        return response.json();
+    else {
+        throw new Error("error");
+    }
 }
 
 export async function changeUserStatus(id: string | null, status: string | null, token: string | undefined) {
@@ -56,7 +57,7 @@ export async function changeUserStatus(id: string | null, status: string | null,
     if (response.status == 200)
         revalidatePath("/admin/users")
     else
-        return response;
+        throw new Error("error");
 }
 
 
@@ -74,14 +75,13 @@ export async function resetPassword(id: string | null, token: string | undefined
     if (response.status == 200)
         revalidatePath("/admin/users")
     else
-        return response;
+        throw new Error("error");
 }
 
 
 
 export async function changePassword(old_password: string | null, password: string | null, confirm_pass: string | null, token: string | undefined) {
-    console.log(old_password)
-    const response = await fetch(process.env.api_base_url + "user/change-password/",
+     const response = await fetch(process.env.api_base_url + "user/change-password/",
         {
             method: "PATCH",
             headers: {

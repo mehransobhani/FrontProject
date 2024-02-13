@@ -25,11 +25,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={[myFont.className, "bg-white"].join(" ")} style={{ direction: "rtl" }}>
-                {/*<div className="  mb-[150px]">*/}
-                {/*    <Nav />*/}
-                {/*</div>*/}
                 {children}
-                {/*<Footer />*/}
             </body>
         </html>
     );

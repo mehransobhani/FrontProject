@@ -3,6 +3,8 @@ import { Dispatch, SetStateAction, useState } from "react";
 import {getServiceHistory, updateService} from "../api/ServiceApi";
 import ServiceHistoryModal from "../modal/ServiceHistoryModal";
 import {JDate} from "@/app/admin/JDate/JDate";
+import {  toast } from 'react-toastify';
+
 interface data {
     id: string,
     first_name: string,
@@ -21,8 +23,7 @@ interface propsData {
 
 export default function ServiceTableRow(props: propsData) {
     const [edit, setEdit] = useState(false);
-    const [error, setError] = useState(false);
-    const [historyModal, setHistoryModal] = useState(false);
+     const [historyModal, setHistoryModal] = useState(false);
     const [history, setHistory] = useState([]);
     const status:{open:string,close:string,"in-progress":string} = {
         "open": "باز",
@@ -44,17 +45,16 @@ export default function ServiceTableRow(props: propsData) {
         let description:string=changedDescription;
         let status:string=changedStatus;
         let id:string=props.data.id;
-       setError(false);
 
        try {
             const update = await updateService(id, status, description, props.token);
-            setEdit(false);
+            toast.success("سرویس با موفقیت ویرایش شد ")
 
         }
         catch (e)
         {
-            setError(true);
-        }
+            toast.error("خطایی در ویرایش سرویس پیش آمد ")
+         }
 
     }
 
@@ -139,8 +139,7 @@ export default function ServiceTableRow(props: propsData) {
                         <button className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onClick={() => { setEdit(true) }}>ویرایش  </button>
 
                 }
-                {error?<span  className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  ">خطایی رخ داده است</span>:""}
-            </td>
+             </td>
         </tr>
     </>)
 }

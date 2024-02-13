@@ -1,3 +1,5 @@
+import {toast} from "react-toastify";
+
 interface prop {
     id: string,
     close: any,
@@ -8,16 +10,17 @@ import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { changeUserStatus } from "../api/UserApi";
 export default function ChangeUserStatusModal(props: prop) {
-    const [responseError, setResponseError] = useState(false);
-    const [selectedStatus, setSelectedStatus] = useState(false);
-    async function changeStatusHandle(e: any) {
+     async function changeStatusHandle(e: any) {
         try {
             const response = await changeUserStatus(props.id, e.get("status"), props.token);
+            toast.success("وضعیت کاربر با موفقیت ویرایش شد")
+
             props.close();
+
         }
         catch (error) {
-            setResponseError(true);
-        }
+            toast.error("خطایی در ویرایش وضعیت کاربر پیش آمد ")
+         }
     }
 
 

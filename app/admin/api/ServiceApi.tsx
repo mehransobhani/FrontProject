@@ -43,5 +43,5 @@ export async function updateService(id:string|undefined,status:string|undefined,
     if(response.status==201)
      revalidatePath("/admin/services")
     else
-        return response;
+        throw new Error("error");
 }

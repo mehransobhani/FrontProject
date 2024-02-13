@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { editBrand } from "../api/BrandApi";
 import { JDate } from "@/app/admin/JDate/JDate";
 import DeleteBrandModal from "../modal/DeleteBrandModal";
+import {toast} from "react-toastify";
 interface data {
     id: string,
     brand: string,
@@ -19,16 +20,17 @@ interface propsData {
 export default function BrandTableRow(props: propsData) {
     const [edit, setEdit] = useState(false);
     const [editName, setEditName] = useState("props.data.brand");
-    const [error, setError] = useState(false);
-    const [deleteBrandModal, setDeleteBrandModal] = useState(false);
+     const [deleteBrandModal, setDeleteBrandModal] = useState(false);
 
     async function editBrandHandle(id: string | null) {
         try {
             const response = editBrand(id, editName, props.token);
             setEdit(false);
+            toast.success("برند با موفقیت ویرایش شد")
         }
         catch (e) {
-            setError(true)
+            toast.error("خطایی در ویرایش برند پیش آمد ")
+
         }
     }
 
@@ -79,12 +81,10 @@ export default function BrandTableRow(props: propsData) {
                         <button
                             className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                             onClick={() => {
-                                editBrandHandle(props.data.id) 
+                                editBrandHandle(props.data.id)
                             }}>ذخیره
                         </button>
-                        {
-                        error ?<span className="font-bold text-red-500">خطایی در انجام عملیات پیش امد </span>:""
-                       }
+
                     </> :
 
                     <button

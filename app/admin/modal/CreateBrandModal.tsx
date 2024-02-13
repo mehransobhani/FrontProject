@@ -9,12 +9,11 @@ import {IdentificationIcon} from "@heroicons/react/24/outline";
  import {BrandFormValidation} from "@/app/admin/FormValidation/FormValidation";
 import {useState} from "react";
 import {BrandNameValidation} from "@/app/admin/FormValidation/BrandFormValidation";
+import {toast} from "react-toastify";
 
 export default function CreateBrandModal(props: props) {
 
-    const [responseError, setResponseError] = useState(false);
-    const [brandValidationError, setBrandValidationError] = useState(undefined);
-    const [added, setAdded] = useState(false);
+     const [brandValidationError, setBrandValidationError] = useState(undefined);
 
     async function addBrandApi(e: FormData) {
         const brand: FormDataEntryValue | null = e.get("name");
@@ -26,17 +25,17 @@ export default function CreateBrandModal(props: props) {
         try {
             const newBrand = await addBrand(brand, props.token);
             props.close();
+            toast.success("برند با موفقیت ایجاد شد ")
 
-         
-        } catch (e) { 
 
-            setResponseError(true);
+        } catch (e) {
+
+            toast.error("خطایی در ایجاد برند پیش آمد ")
         }
     }
 
     function BrandValidationHandle(e: any) {
-        setResponseError(false)
-        const brand: FormDataEntryValue | undefined = e.target.value;
+         const brand: FormDataEntryValue | undefined = e.target.value;
         try {
             const validatedData = BrandNameValidation.parse({brand})
             setBrandValidationError(undefined)
@@ -71,11 +70,7 @@ export default function CreateBrandModal(props: props) {
                             role="alert">
                             {brandValidationError}
                         </div> : ""}
-                        {responseError ? <div
-                            className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
-                            role="alert">
-                            خطایی در ثبت پیش امد
-                        </div> : ""}
+
                         <div className="flex items-center justify-start w-full">
                             <button type={"submit"}
                                     className="mx-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">ایجاد

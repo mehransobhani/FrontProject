@@ -1,3 +1,5 @@
+import {toast} from "react-toastify";
+
 interface prop {
     id: string,
     token: string | undefined,
@@ -8,15 +10,16 @@ import { useState } from "react";
 import { resetPassword } from "../api/UserApi";
 export default function ResetPasswordModal(props: prop) {
 
-    const [responseError, setResponseError] = useState(false);
-    async function resetPasswordHandle(e: any) {
+     async function resetPasswordHandle(e: any) {
         try {
             const response = await resetPassword(props.id, props.token);
+            toast.success("بازیابی رمز عبور با موفقیت انجام شد")
+
             props.close();
 
         }
         catch (error) {
-            setResponseError(true);
+            toast.error("خطایی در بازیابی رمز عبور پیش آمد ")
 
         }
 
@@ -37,9 +40,6 @@ export default function ResetPasswordModal(props: prop) {
                                 آیا از ریست رمزعبور کاربر اطمینان دارید ؟
                             </span>
                         </div>
-                        {
-                            responseError ? <span className="font-bold text-red-500">خطایی در انجام عملیات پیش امد </span> : ""
-                        }
                     </div>
                     <div className="flex items-center justify-start w-full">
                         <button onClick={resetPasswordHandle}

@@ -30,7 +30,7 @@ export async function addBrand(brand: FormDataEntryValue | null, token: string |
     if (response.status == 201)
         revalidatePath("admin/brands");
     else
-        return response;
+        throw new Error("error");
 
 }
 
@@ -53,7 +53,7 @@ export async function editBrand(id: string | null, brand: string | null, token: 
      if (response.status == 200)
         revalidatePath("admin/brands");
     else
-        return response;
+         throw new Error("error");
 
 }
 
@@ -73,6 +73,6 @@ export async function deleteBrand(id: string | null, token: string | undefined) 
     if (response.status == 204)
         revalidatePath("/admin/brands")
     else
-        return response;
+        throw new Error("error");
 
 }

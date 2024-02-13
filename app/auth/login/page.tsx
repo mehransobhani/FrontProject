@@ -9,7 +9,7 @@ export default async function login
      searchParams,
  }: {
     params: { slug: string };
-    searchParams?: { [key: string]: string | string[] | undefined };
+    searchParams?: { [key: string]: string | string[] | undefined |any};
 })
 {
 

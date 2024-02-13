@@ -6,7 +6,8 @@ import Footer from "@/app/component/Footer/Footer";
 import Nav from "../component/Nav/Nav";
 import Header from "../component/Header/Header";
 import Hero from "../component/Hero/Hero";
-
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const myFont: NextFont = localFont({ src: '../../public/font/Vazirmatn-Regular.woff2' })
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export default function MainLayout({
         <div className="  mb-[70px] sm:mb-[150px]">
             <Nav />
         </div>
+        <ToastContainer  rtl={true}  />
         {children}
         <Footer />
         </body>
