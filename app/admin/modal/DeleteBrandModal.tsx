@@ -10,8 +10,7 @@ import { useState } from "react";
 import { deleteBrand } from "../api/BrandApi";
 export default function DeleteBrandModal(props: prop) {
 
-    const [responseError, setResponseError] = useState(false);
-     async function deleteBrandHandle() {
+      async function deleteBrandHandle() {
 
         try {
             const response = await deleteBrand(props.id, props.token);

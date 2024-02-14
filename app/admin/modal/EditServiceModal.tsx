@@ -17,7 +17,6 @@ import {updateService} from "@/app/admin/api/ServiceApi";
 
 export default function EditServiceModal(props: props) {
 
-     const [brandValidationError, setBrandValidationError] = useState(undefined);
 
     async function editClickHandle(e:FormData){
         let description:FormDataEntryValue|null=e.get("description");
@@ -36,19 +35,6 @@ export default function EditServiceModal(props: props) {
             toast.error("خطایی در ویرایش سرویس پیش آمد ")
         }
 
-    }
-
-
-    function BrandValidationHandle(e: any) {
-         const brand: FormDataEntryValue | undefined = e.target.value;
-        try {
-            const validatedData = BrandNameValidation.parse({brand})
-            setBrandValidationError(undefined)
-        } catch (err: any) {
-            let error = JSON.parse(err.message);
-            setBrandValidationError(error[0].message)
-            return;
-        }
     }
 
     return (<>

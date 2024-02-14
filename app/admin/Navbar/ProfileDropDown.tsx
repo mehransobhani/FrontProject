@@ -14,7 +14,7 @@ export default function ProfileDropDown(props: {token:string|undefined , logout:
             {
                 changePasswordModal && <ChangePasswordModal close={()=>setChangePasswordModal(false)} token={props.token}/>
             }
-            <div className="w-12 h-12 bg-gray-300 rounded-full cursor-pointer mr-3" onClick={() => {
+            <div className="w-12 h-12 bg-gray-300 rounded-full cursor-pointer mr-3 z-50" onClick={() => {
                 setShow(!show)
             }}>
                 <Image src={profile} alt={"profile"} className="w-12 h-12 rounded-full"/>

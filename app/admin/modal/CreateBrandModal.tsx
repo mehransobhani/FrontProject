@@ -13,7 +13,7 @@ import {toast} from "react-toastify";
 
 export default function CreateBrandModal(props: props) {
 
-     const [brandValidationError, setBrandValidationError] = useState(undefined);
+     const [brandValidationError, setBrandValidationError] = useState<any>(undefined);
 
     async function addBrandApi(e: FormData) {
         const brand: FormDataEntryValue | null = e.get("name");

@@ -11,12 +11,12 @@ import {UserPasswordValidation} from "@/app/admin/FormValidation/UserFormValidat
 
 export default function ChangePasswordModal(props: props) {
 
-    const [response, setResponse] = useState("");
-    const [oldPasswordValidationError, setOldPasswordValidationError] = useState(undefined);
-    const [newPasswordValidationError, setNewPasswordValidationError] = useState(undefined);
-    const [oldPassword, setOldPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [response, setResponse] = useState<string>("");
+    const [oldPasswordValidationError, setOldPasswordValidationError] = useState<any>(undefined);
+    const [newPasswordValidationError, setNewPasswordValidationError] = useState<any>(undefined);
+    const [oldPassword, setOldPassword] = useState<string>("");
+    const [newPassword, setNewPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
 
     async function changePasswordHandle(e:any) {
         e.preventDefault()

@@ -16,18 +16,22 @@ import {
 import {toast} from "react-toastify";
 export default function CreateUserModal(props :props){
 
-     const [passwordValidationError, setPasswordValidationError] = useState(undefined);
-    const [firstNameValidationError, setFirstNameValidationError] = useState(undefined);
-    const [lastNameValidationError, setLastNameValidationError] = useState(undefined);
-    const [phoneValidationError, setPhoneValidationError] = useState(undefined);
-    const [confirmPasswordValidationError, setConfirmPasswordValidationError] = useState(undefined);
-    async function addUserForm(e:FormData) {
+     const [passwordValidationError, setPasswordValidationError] = useState<any>(undefined);
+    const [firstNameValidationError, setFirstNameValidationError] = useState<any>(undefined);
+    const [lastNameValidationError, setLastNameValidationError] = useState<any>(undefined);
+    const [phoneValidationError, setPhoneValidationError] = useState<any>(undefined);
+    const [confirmPasswordValidationError, setConfirmPasswordValidationError] = useState<any>(undefined);
 
-        let first_name=e.get("first_name");
-        let last_name=e.get("last_name");
-        let phone=e.get("phone");
-        let password=e.get("password");
-        let password_confirmation=e.get("password_confirmation");
+    const p2e = (s: any) => s.replace(/[۰-۹]/g, (d: string) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d).toString());
+
+
+        async function addUserForm(e:FormData) {
+
+        let first_name:FormDataEntryValue|null=e.get("first_name");
+        let last_name:FormDataEntryValue|null=e.get("last_name");
+        let phone:FormDataEntryValue|null=p2e(e.get("phone"));
+        let password:FormDataEntryValue|null=e.get("password");
+        let password_confirmation:FormDataEntryValue|null=e.get("password_confirmation");
 
         try{
        let response= await addUser(first_name,
