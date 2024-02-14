@@ -26,7 +26,7 @@ export default function Header() {
 
                             <div className="hidden sm:mx-6 sm:block ">
                                 <div className="flex  items-center gap-4">
-                                    <span className="text-xl font-bold text-gray-500">۰۹۲۱-۹۱۳۰۹۵۷۵</span>
+                                    <span className="text-xl font-bold text-gray-500">۰۲۱-۹۱۳۰۹۵۷۵</span>
                                     <div className="bg-sky-600 w-8 h-8 rounded-full justify-center flex  items-center">
                                         <PhoneIcon className="h-4 w-4 text-white justify-center items-center" />
                                     </div>
@@ -34,7 +34,7 @@ export default function Header() {
                             </div>
                             <div className="hidden sm:mx-6 sm:block">
                                 <div className="flex  items-center gap-4">
-                                    <span className="text-xl font-bold text-gray-500">۰۹۲۱-۹۱۳۰۳۶۶۶</span>
+                                    <span className="text-xl font-bold text-gray-500">۰۲۱-۹۱۳۰۳۶۶۶</span>
                                     <div className="bg-sky-600 w-8 h-8 rounded-full justify-center flex  items-center">
                                         <PhoneIcon className="h-4 w-4 text-white justify-center items-center" />
                                     </div>

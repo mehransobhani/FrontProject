@@ -59,7 +59,7 @@ export default function Hero() {
                     <div
                         className="bg-yellow-300 p-4 rounded-xl relative flex h-16 items-center justify-center   ">
                         <div className="flex  items-center gap-4">
-                            <span className="text-sm sm:text-lg font-bold text-gray-500">۰۹۲۱-۹۱۳۰۳۶۶۶</span>
+                            <span className="text-sm sm:text-lg font-bold text-gray-500">۰۲۱-۹۱۳۰۳۶۶۶</span>
                             <div className=" w-8 h-8 rounded-full justify-center flex  items-center">
                                 <PhoneIcon className="h-6 w-6 text-black justify-center items-center"/>
                             </div>
