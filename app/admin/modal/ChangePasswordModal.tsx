@@ -8,11 +8,11 @@ interface props {
 import {IdentificationIcon} from "@heroicons/react/24/outline";
 import {useState} from "react";
 import {UserPasswordValidation} from "@/app/admin/FormValidation/UserFormValidation";
+import {toast} from "react-toastify";
 
 export default function ChangePasswordModal(props: props) {
 
-    const [response, setResponse] = useState<string>("");
-    const [oldPasswordValidationError, setOldPasswordValidationError] = useState<any>(undefined);
+     const [oldPasswordValidationError, setOldPasswordValidationError] = useState<any>(undefined);
     const [newPasswordValidationError, setNewPasswordValidationError] = useState<any>(undefined);
     const [oldPassword, setOldPassword] = useState<string>("");
     const [newPassword, setNewPassword] = useState<string>("");
@@ -43,9 +43,9 @@ export default function ChangePasswordModal(props: props) {
 
         try {
            let response=await changePassword(oldPassword,newPassword,confirmPassword,props.token);
-           setResponse(response.message);
-         } catch (e) {
-            console.log(e)
+           toast.success(response.message);
+          } catch (e) {
+            toast.error("مشکلی در اجرای عملیات پیش آمد .");
         }
     }
 
@@ -128,11 +128,7 @@ export default function ChangePasswordModal(props: props) {
 
 
 
-                        {response ? <div
-                            className="p-2 mb-3 text-sm text-blue-800 rounded-lg bg-blue-50  "
-                            role="alert">
-                            {response}
-                         </div> : ""}
+
                         <div className="flex items-center justify-start w-full">
                             <button onClick={changePasswordHandle}
                                     className="mx-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">ویرایش

@@ -4,10 +4,25 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {Bars4Icon} from "@heroicons/react/24/solid";
 import {XMarkIcon} from "@heroicons/react/24/solid";
- export default   function Sidebar(props:{token:string|undefined , role:string}) {
-    const [collapseShow, setCollapseShow] =  useState("hidden");
-     const pathname = usePathname();
-     return (<>
+import {me} from "@/app/admin/api/UserApi";
+import {getCookie} from "@/app/admin/GetCookie";
+
+export default function Sidebar() {
+    const [collapseShow, setCollapseShow] = useState("hidden");
+    const [role, setRole] = useState("");
+    const pathname = usePathname();
+
+
+    useEffect(() => {
+        let c:Promise<string|undefined> = getCookie()
+        c.then((token:string|undefined):void => {
+            me(token).then((res):void => {
+                 setRole(res.admin_role);
+            });
+        })
+    })
+
+    return (<>
         <nav
             className="md:right-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-[#445861]  flex flex-wrap items-center justify-between relative md:w-56 z-10 py-4 px-6">
             <div
@@ -26,7 +41,7 @@ import {XMarkIcon} from "@heroicons/react/24/solid";
 
 
                 <div
-                    className={`md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded ${collapseShow}` }
+                    className={`md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded ${collapseShow}`}
                 >
                     <div
                         className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
@@ -45,7 +60,39 @@ import {XMarkIcon} from "@heroicons/react/24/solid";
                             </div>
                         </div>
                     </div>
-                    {  props.role=="super-admin" &&
+                    <div className={"mt-2"}>
+                        <Link href={"/admin/services"}>
+                            <div
+                                className={["flex items-center p-2  rounded-lg  text-white hover:bg-gray-700 group", pathname == "/admin/services" ? "bg-gray-700" : ""].join(" ")}>
+                                <svg
+                                    className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                    viewBox="0 0 18 18">
+                                    <path
+                                        d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
+                                </svg>
+                                <span className="flex-1 ms-3 whitespace-nowrap">سرویس ها</span>
+                            </div>
+                        </Link>
+                    </div>
+
+                    <div className={"mt-2"}>
+                        <Link href={"/admin/brands"}>
+                            <div
+                                className={["flex items-center p-2  rounded-lg  text-white hover:bg-gray-700 group", pathname == "/admin/brands" ? "bg-gray-700" : ""].join(" ")}>
+                                <svg
+                                    className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                    viewBox="0 0 18 18">
+                                    <path
+                                        d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
+                                </svg>
+                                <span className="flex-1 ms-3 whitespace-nowrap">برند ها</span>
+                            </div>
+                        </Link>
+                    </div>
+
+                    {role == "super-admin" &&
                         <div className={"mt-2"}>
 
                             <Link href={"/admin/users"}>
@@ -62,36 +109,6 @@ import {XMarkIcon} from "@heroicons/react/24/solid";
                                 </div>
                             </Link>
                         </div>}
-                    <div className={"mt-2"}>
-                        <Link href={"/admin/brands"}>
-                            <div
-                                className={["flex items-center p-2  rounded-lg  text-white hover:bg-gray-700 group",  pathname == "/admin/brands" ?"bg-gray-700":"" ].join(" ")}>
-                                <svg
-                                    className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                    viewBox="0 0 18 18">
-                                    <path
-                                        d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
-                                </svg>
-                                <span className="flex-1 ms-3 whitespace-nowrap">برند ها</span>
-                            </div>
-                        </Link>
-                    </div>
-                    <div className={"mt-2"}>
-                        <Link href={"/admin/services"}>
-                            <div
-                                className={["flex items-center p-2  rounded-lg  text-white hover:bg-gray-700 group", pathname == "/admin/services" ? "bg-gray-700" : ""].join(" ")}>
-                                <svg
-                                    className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                    viewBox="0 0 18 18">
-                                    <path
-                                        d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z"/>
-                                </svg>
-                                <span className="flex-1 ms-3 whitespace-nowrap">سرویس ها</span>
-                            </div>
-                        </Link>
-                    </div>
 
                 </div>
             </div>
