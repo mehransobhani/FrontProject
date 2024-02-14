@@ -14,7 +14,6 @@ export default function Nav() {
     }
 
     const pathName=usePathname();
-    console.log(pathName)
     interface menu {
         name: string;
         href: string;

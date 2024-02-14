@@ -38,11 +38,11 @@ export default function AdminLayout({
 }
     return (
         <html lang="en">
-        <body className={myFont.className} style={{direction:"rtl"}}>
-        <Sidebar  token={token} role={role}/>
+        <body className={[myFont.className, "bg-white"].join(" ")} style={{direction: "rtl"}}>
+        <Sidebar token={token} role={role}/>
         <div className="relative md:mr-56 bg-blueGray-100">
-            <AdminNavbar  token={token} logout={logout}/>
-            <ToastContainer  rtl={true} position={"top-center"}  />
+            <AdminNavbar token={token} logout={logout}/>
+            <ToastContainer rtl={true} position={"top-center"}/>
 
             {children}
         </div>

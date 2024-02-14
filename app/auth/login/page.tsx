@@ -9,7 +9,7 @@ export default async function login
      searchParams,
  }: {
     params: { slug: string };
-    searchParams?: { [key: string]: string | string[] | undefined |any};
+    searchParams?: { [key: string]: string | string[] | undefined | any };
 })
 {
 
@@ -43,7 +43,7 @@ export default async function login
                             </div>
                             <h1 className="mb-2 text-2xl">پنل مدیریت</h1>
                             <span className=" font-bold text-gray-500">برای ورود  موبایل و کلمه عبور خود را وارد کنید</span>
-                            { searchParams.find && searchParams.find==0 &&
+                            { searchParams && searchParams.find && searchParams.find==0 &&
 
                                 <div
                                     className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
@@ -55,13 +55,13 @@ export default async function login
                         <form action={login}>
                             <div className="mb-4 text-lg justify-center flex">
                                 <input
-                                    className="rounded-3xl border-none bg-indigo-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-gray-800  outline-none backdrop-blur-md"
+                                    className="rounded-xl focus:placeholder:opacity-0 border-none bg-indigo-400 bg-opacity-50 px-8 py-3 text-center text-inherit placeholder-gray-500  outline-none backdrop-blur-md"
                                     type="text" name="phone" placeholder="شماره موبایل"/>
                             </div>
 
                             <div className="mb-4 text-lg justify-center flex">
                                 <input
-                                    className="rounded-3xl border-none bg-indigo-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-gray-800  outline-none backdrop-blur-md"
+                                     className="rounded-xl focus:placeholder:opacity-0 border-none bg-indigo-400 bg-opacity-50 px-8 py-3 text-center text-inherit placeholder-gray-500  outline-none backdrop-blur-md"
                                     type="Password" name="password" placeholder="کلمه عبور"/>
                             </div>
 

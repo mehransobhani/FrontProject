@@ -18,7 +18,7 @@ interface propsData{
  }
 
 export default function BrandTable(props:prop) {
-    const [modal ,setModal]=useState(false);
+    const [modal ,setModal]=useState<boolean>(false);
 
     return (<>
       {
@@ -67,10 +67,9 @@ export default function BrandTable(props:prop) {
 
                         <tbody>
                             {
-                                props.data.map((data,index)=>{return(<>
-                                     <BrandTableRow  data={data} token={props.token} index={index}/>
-
-                                </>)})
+                                props.data.map((data:propsData,index:number)=>{return(
+                                     <BrandTableRow key={index} data={data} token={props.token} index={index}/>
+                                )})
                             }
                         </tbody>
 

@@ -32,7 +32,7 @@ export async function getServicesPagination(page:number,token:string|undefined) 
     return response.json();
 }
 
-export async function updateService(id:string|undefined,status:string|undefined,description:string|undefined,token:string|undefined) {
+export async function updateService(id:string|undefined,status:FormDataEntryValue|null,description:FormDataEntryValue|null,token:string|undefined) {
     const response = await fetch(process.env.api_base_url + "service/service-update/"+id+"/",
         {
             method:'POST',

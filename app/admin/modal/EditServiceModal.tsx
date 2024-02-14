@@ -2,7 +2,10 @@ import {addBrand} from "@/app/admin/api/BrandApi";
 
 interface props {
     close: any,
+    data: any,
     token: string|undefined,
+    change: any,
+    page:number
 }
 
 import {IdentificationIcon} from "@heroicons/react/24/outline";
@@ -10,29 +13,31 @@ import {IdentificationIcon} from "@heroicons/react/24/outline";
 import {useState} from "react";
 import {BrandNameValidation} from "@/app/admin/FormValidation/BrandFormValidation";
 import {toast} from "react-toastify";
+import {updateService} from "@/app/admin/api/ServiceApi";
 
-export default function CreateBrandModal(props: props) {
+export default function EditServiceModal(props: props) {
 
      const [brandValidationError, setBrandValidationError] = useState(undefined);
 
-    async function addBrandApi(e: FormData) {
-        const brand: FormDataEntryValue | null = e.get("name");
+    async function editClickHandle(e:FormData){
+        let description:FormDataEntryValue|null=e.get("description");
+        let status:FormDataEntryValue|null=e.get("status");
+        let id:string=props.data.id;
+
         try {
-            const validatedData = BrandFormValidation.parse({brand})
-        } catch (err: any) {
-            return;
+            const update = await updateService(id, status, description, props.token);
+            toast.success("سرویس با موفقیت ویرایش شد ")
+        props.close();
+            if(props.page>1)
+                props.change(props.page);
         }
-        try {
-            const newBrand = await addBrand(brand, props.token);
-            props.close();
-            toast.success("برند با موفقیت ایجاد شد ")
-
-
-        } catch (e) {
-
-            toast.error("خطایی در ایجاد برند پیش آمد ")
+        catch (e)
+        {
+            toast.error("خطایی در ویرایش سرویس پیش آمد ")
         }
+
     }
+
 
     function BrandValidationHandle(e: any) {
          const brand: FormDataEntryValue | undefined = e.target.value;
@@ -55,25 +60,39 @@ export default function CreateBrandModal(props: props) {
                     <div className="w-12 flex justify-start text-gray-600 mb-3">
                         <IdentificationIcon/>
                     </div>
-                    <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">ایجاد برند</h1>
-                    <form action={addBrandApi}>
+                    <h1 className="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">ویرایش سرویس</h1>
+                    <form action={editClickHandle}>
 
-                        <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal"> نام
-                            برند</label>
+                        <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal">
+                            وضعیت سرویس</label>
+                        <br/>
 
-                        <input name={"name"}
-                               onBlur={BrandValidationHandle}
-                               className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
-                               placeholder="نام برند"/>
-                        {brandValidationError ? <div
-                            className="p-2 mb-3 text-sm text-red-800 rounded-lg bg-red-50  "
-                            role="alert">
-                            {brandValidationError}
-                        </div> : ""}
+                        <select name={"status"}
+                            className=" w-full border py-2 rounded-md  bg-white bg-none  px-2 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm">
+                            <option value={"open"} selected={props.data.status == "open"}>
+                                باز
+                            </option>
+                            <option value={"close"} selected={props.data.status == "close"}>
+                                بسته
+                            </option>
+                            <option value={"in-progress"} selected={props.data.status == "in-progress"}>
+                                درحال انجام
+                            </option>
+
+                        </select>
+<br/>
+                        <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal">
+                            پیگیری </label>
+
+                        <textarea name={"description"}
+                               className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-32 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                               placeholder="پیگیری">
+                            {props.data.description}
+                        </textarea>
 
                         <div className="flex items-center justify-start w-full">
                             <button type={"submit"}
-                                    className="mx-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">ایجاد
+                                    className="mx-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm">ویرایش
                             </button>
                             <button
                                 className="mx-1 focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"

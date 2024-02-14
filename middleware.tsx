@@ -5,7 +5,6 @@ import {me} from "@/app/auth/api/LoginApi";
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
 
-    console.log(request.url)
     const ME = await me();
 
     if (ME.status != 200 && !request.url.match("/auth/login")) {
@@ -22,7 +21,7 @@ export async function middleware(request: NextRequest) {
 
         if (request.url.match("/auth/login")) {
             return NextResponse.redirect(new URL('/admin/services', request.url))
-        } 
+        }
     }
 }
 

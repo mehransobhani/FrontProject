@@ -1,7 +1,7 @@
 import {JDate} from "@/app/admin/JDate/JDate";
 
 interface prop {
-    data: [propData],
+    data: propData[],
     close:any
 }
 
@@ -14,7 +14,7 @@ interface propData {
 }
 export default function ServiceHistoryModal(props: prop) {
 
-    const status:{"open":string,"close":string,"in-progress":string} = {
+    const status:{[key: string]: string} = {
         "open": "باز",
         "close": "بسته",
         "in-progress": "درحال انجام",
@@ -26,8 +26,8 @@ export default function ServiceHistoryModal(props: prop) {
                 <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
                     <div className="w-full flex justify-start text-gray-600 mb-3">
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-wallet"
-                             width="52" height="52" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
-                             fill="none" stroke-linecap="round" stroke-linejoin="round">
+                             width="52" height="52" viewBox="0 0 24 24" strokeWidth="1" stroke="currentColor"
+                             fill="none" strokeLinecap="round" strokeLinejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z"/>
                             <path
                                 d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12"/>
@@ -90,8 +90,8 @@ export default function ServiceHistoryModal(props: prop) {
                         className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600"
                         aria-label="close modal" role="button" onClick={props.close}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-x" width="20"
-                             height="20" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none"
-                             stroke-linecap="round" stroke-linejoin="round">
+                             height="20" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" fill="none"
+                             strokeLinecap="round" strokeLinejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z"/>
                             <line x1="18" y1="6" x2="6" y2="18"/>
                             <line x1="6" y1="6" x2="18" y2="18"/>

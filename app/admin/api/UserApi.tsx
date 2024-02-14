@@ -107,7 +107,8 @@ export async function me(token:string|undefined="") {
             headers: {
                 'Content-type': 'application/json',
                 "Authorization": 'Bearer '+ token
-            }
+            },
+            cache:"no-cache"
         }
     )
     return  response.json();

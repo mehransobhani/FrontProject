@@ -10,6 +10,7 @@ import {registerService} from "@/app/api/ServicesApi";
 import {useState} from "react";
 import {toast} from "react-toastify";
 import {revalidatePath} from "next/cache";
+import {redirect} from "next/navigation";
 
 interface prop {
     brands: []
@@ -91,8 +92,10 @@ export default function ContactUsForm(props: prop) {
         let registerData = await registerService(fName, lName, phone, brand, address);
         if (registerData.status == 201) {
             toast.success("درخواست با موفقیت ثبت شد، همکاران ما در اسرع وقت با شما تماس خواهند گرفت")
+            redirect("/")
         } else {
             toast.error("مشکلی در ثبت درخواست پیش آمد")
+
         }
     }
 

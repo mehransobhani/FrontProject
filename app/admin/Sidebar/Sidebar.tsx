@@ -6,7 +6,7 @@ import {Bars4Icon} from "@heroicons/react/24/solid";
 import {XMarkIcon} from "@heroicons/react/24/solid";
  export default   function Sidebar(props:{token:string|undefined , role:string}) {
     const [collapseShow, setCollapseShow] =  useState("hidden");
-     const pathname = usePathname(); 
+     const pathname = usePathname();
      return (<>
         <nav
             className="md:right-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-[#445861]  flex flex-wrap items-center justify-between relative md:w-56 z-10 py-4 px-6">
@@ -26,7 +26,7 @@ import {XMarkIcon} from "@heroicons/react/24/solid";
 
 
                 <div
-                    className={"md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " + collapseShow}
+                    className={`md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded ${collapseShow}` }
                 >
                     <div
                         className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
