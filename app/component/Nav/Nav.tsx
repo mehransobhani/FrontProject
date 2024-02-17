@@ -117,9 +117,9 @@ export default function Nav() {
 
                                             <span className="sr-only">Open main menu</span>
                                             {open ? (
-                                                <XMarkIcon className="block h-6 w-6" aria-hidden="true"/>
+                                                <XMarkIcon className="block h-6 w-6 text-white" aria-hidden="true"/>
                                             ) : (
-                                                <Bars3Icon className="block h-6 w-6" aria-hidden="true"/>
+                                                <Bars3Icon className="block h-6 w-6 text-white"  aria-hidden="true"/>
                                             )}
                                         </Disclosure.Button>
                                     </div>
@@ -133,13 +133,13 @@ export default function Nav() {
                                         <Fragment key={index}>
                                             <Disclosure.Button
                                                 key={item.name}
-                                                as="a"
+                                                as={item.sub?"span":"a"}
                                                 href={item.href}
                                                 className={classNames(
                                                     item.current
                                                         ? "text-yellow-600 "
                                                         : "text-gray-800  ",
-                                                    "block py-4 text-base font-medium border-b border-neutral-200  text-right"
+                                                    "block py-4 text-base font-medium border-t border-neutral-200  text-right"
                                                 )}
                                                 aria-current={item.current ? "page" : undefined}
                                             >
@@ -156,7 +156,7 @@ export default function Nav() {
                                                             subItem.current
                                                                 ? "text-yellow-600"
                                                                 : "text-neutral-700  ",
-                                                            "block py-4  pr-10 text-base font-medium border-b border-neutral-200  text-right"
+                                                            "block py-2   text-base font-medium border-ht border-neutral-100  text-right"
                                                         )}
                                                         aria-current={subItem.current ? "page" : undefined}
                                                     >
