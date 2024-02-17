@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="VcsDirectoryMappings">
-    <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../GIT/Shop" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../GitBackup/Academy" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../GitBackup/LaravelShop" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../GitBackup/Shop/LARAVEL" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../GitBackup/Shop/Laravel" vcs="Git" />
+    <mapping directory="$USER_HOME$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../LocalGit/Academy/Laravel" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../LocalGit/Academy/lv" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../LocalGit/LaravelShop" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../LocalGit/Shop/L" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../LocalGit/Shop/LT" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../patterns/decorector/laravel-decorator" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../patterns/decorector/laravel-design-patterns" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../patterns/s/design-patterns-with-laravel" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../patterns/s/laravel-decorator" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../patterns/solid/laravel-solid-architecture" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../patterns/solid/solid-principles-example-laravel" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../patterns/solid/try-laravel-solid" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../patterns/strategy-design-pattern" vcs="Git" />
   </component>
 </project>

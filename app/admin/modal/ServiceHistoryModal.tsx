@@ -87,7 +87,7 @@ export default function ServiceHistoryModal(props: prop) {
                     </div>
 
                     <button
-                        className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded focus:ring-2 focus:outline-none focus:ring-gray-600"
+                        className="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out rounded  focus:outline-none focus:ring-gray-600"
                         aria-label="close modal" role="button" onClick={props.close}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-x" width="20"
                              height="20" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" fill="none"

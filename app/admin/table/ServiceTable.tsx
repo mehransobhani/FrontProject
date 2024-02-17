@@ -32,11 +32,12 @@ export default function ServiceTable(props: prop) {
     const [hasMore, setHasMore] = useState<boolean>(props.data.next ? true : false);
     const [response, setResponse] = useState<propObject | undefined>(undefined);
 
+    let totalPage=Math.ceil(props.data.count/10)
+
     async function changePageHandle(pages: number = page) {
         let data = await getServicesPagination(pages, props.token);
         setResponse(data);
         setPage(pages);
-
         if (data.next) {
             setHasMore(true);
         } else {
@@ -121,13 +122,21 @@ export default function ServiceTable(props: prop) {
 
                     <Pagination
                         page={page}
+                        totalPage={totalPage}
                         hasMore={hasMore}
                         nextPage={() => {
                             changePageHandle(page + 1)
                         }}
+                        nextPage2={() => {
+                            changePageHandle(page + 2)
+                        }}
+                        previousPage2={() => {
+                            changePageHandle(page - 2)
+                        }}
                         previousPage={() => {
                             changePageHandle(page - 1)
                         }}/>
+
                 </div>
             </div>
         </div>
