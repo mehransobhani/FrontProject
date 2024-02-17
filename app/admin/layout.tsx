@@ -10,7 +10,7 @@ import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import {redirect} from "next/navigation";
 import {revalidatePath} from "next/cache";
-
+ 
 const myFont:NextFont = localFont({ src: '../../public/font/Vazirmatn-Regular.woff2' })
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -20,25 +20,30 @@ export const metadata: Metadata = {
 
 
 
-export default function AdminLayout({
+export  default async function AdminLayout({
                                        children,
                                    }: Readonly<{
     children: React.ReactNode;
 }>) {
 
+  let token:string|undefined = cookies().get("access-token")?.value;
+  let Me=await me(token);
+  let role:string|undefined=Me?.admin_role;
+  let name:string|undefined=Me?.first_name+" "+Me.last_name
 
- async function logout(){
+ async function logout()
+    {
      "use server"
      cookies().delete("access-token");
      redirect("/auth/login")
+    }
 
-}
     return (
         <html lang="en">
         <body className={[myFont.className, "bg-white"].join(" ")} style={{direction: "rtl"}}>
-        <Sidebar  />
+        <Sidebar role={role}  />
         <div className="relative md:mr-56 bg-blueGray-100">
-            <AdminNavbar  logout={logout}/>
+            <AdminNavbar  logout={logout} name={name} token={token}/>
             <ToastContainer rtl={true} position={"top-center"}/>
 
             {children}

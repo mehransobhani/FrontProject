@@ -1,26 +1,14 @@
 "use client"
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {Bars4Icon} from "@heroicons/react/24/solid";
-import {XMarkIcon} from "@heroicons/react/24/solid";
-import {me} from "@/app/admin/api/UserApi";
-import {getCookie} from "@/app/admin/GetCookie";
+import {XMarkIcon} from "@heroicons/react/24/solid"; 
 
-export default function Sidebar() {
+export default function Sidebar(props:{role:string|undefined}) {
     const [collapseShow, setCollapseShow] = useState("hidden");
-    const [role, setRole] = useState("");
-    const pathname = usePathname();
-
-
-    useEffect(() => {
-        let c:Promise<string|undefined> = getCookie()
-        c.then((token:string|undefined):void => {
-            me(token).then((res):void => {
-                 setRole(res.admin_role);
-            });
-        })
-    })
+     const pathname = usePathname();
+ 
 
     return (<>
         <nav
@@ -92,7 +80,7 @@ export default function Sidebar() {
                         </Link>
                     </div>
 
-                    {role == "super-admin" &&
+                    {props.role == "super-admin" &&
                         <div className={"mt-2"}>
 
                             <Link href={"/admin/users"}>

@@ -117,7 +117,7 @@ export default function CustomerTable(props: prop) {
                                             </td>
                                             <td className="border-t-0 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                                 <button  onClick={() => { setChangeStatusModal(true); setSelectedResetPassword(data.id) }}
-                                                className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none   focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">تغییر وضعیت</button>
+                                                         className=" bg-white text-gray-700 active:bg-gray-100  hover:bg-gray-50 text-xs font-bold uppercase p-3 rounded border outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" >تغییر وضعیت</button>
                                             </td>
                                         </tr>
 )
