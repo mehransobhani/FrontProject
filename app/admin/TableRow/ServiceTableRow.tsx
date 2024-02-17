@@ -54,14 +54,14 @@ export default function ServiceTableRow(props: propsData) {
 
     return (<>
         {
-            historyModal && <ServiceHistoryModal data={history} close={() => { setHistoryModal(false) }} />
+            historyModal && <tr><td> <ServiceHistoryModal data={history} close={() => { setHistoryModal(false) }} /></td></tr>
         }
         {
-            detailsModal &&  <ServiceDetailsModal data={props.data} close={()=>{setDetailsModal(false)}} />
+            detailsModal && <tr><td> <ServiceDetailsModal data={props.data} close={()=>{setDetailsModal(false)}} /></td></tr>
         }
         {
-            edit &&  <EditServiceModal change={props.change} page={props.page} data={props.data} token={props.token} close={()=>{setEdit(false)}} />
-        }
+            edit &&  <tr><td><EditServiceModal change={props.change} page={props.page} data={props.data} token={props.token} close={() => { setEdit(false) }}/></td></tr>
+                }
         <tr className="text-center hover:bg-gray-100" key={props.index}>
 
             <td className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">

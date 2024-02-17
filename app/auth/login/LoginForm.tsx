@@ -30,8 +30,7 @@ export default function LoginForm
 
     return (
         <>
-            <div className="flex h-screen w-full items-center justify-center bg-slate-100 bg-cover bg-no-repeat"
-                 style={{backgroundImage: "url('../../public/icon/login_bg.jpg')"}}>
+            <div className="flex h-screen w-full items-center justify-center bg-slate-100 bg-cover bg-no-repeat" >
 
                 <div
                     className="rounded-xl bg-gray-100 bg-opacity-80 px-16 border py-10 shadow-2xl backdrop-blur-md max-sm:px-8">

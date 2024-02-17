@@ -35,7 +35,7 @@ export default function BrandTableRow(props: propsData) {
     }
 
     return (<>
-        {deleteBrandModal && <DeleteBrandModal token={props.token} id={props.data.id} close={() => { setDeleteBrandModal(false) }} />}
+        {deleteBrandModal && <tr><td><DeleteBrandModal token={props.token} id={props.data.id} close={() => { setDeleteBrandModal(false) }} /></td></tr> }
         <tr className="text-center hover:bg-gray-100">
             <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4  text-blueGray-700 ">
                 {props.index + 1}

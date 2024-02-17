@@ -113,7 +113,7 @@ export default function ContactUsForm(props: prop) {
                         تماس با ما و درخواست ارسال تعمیرکار
                     </h2>
                 </div>
-                <form action={registerForm} method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
+                <form action={registerForm}   className="mx-auto mt-16 max-w-xl sm:mt-20">
                     <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 
                         <div className="sm:col-span-2">
@@ -180,12 +180,12 @@ export default function ContactUsForm(props: prop) {
                                 <div className="mt-2.5">
                                     <select name="brand"
                                             className="p-2 mb-5 mt-2 bg-white text-gray-600 focus:outline-none focus:border focus:border-sky-600 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border">
-                                        {props.brands && props.brands.map((item) => {
-                                            return (<>
-                                                <option value={item}>
+                                        {props.brands && props.brands.map((item,index:number) => {
+                                            return (
+                                                <option value={item} key={index}>
                                                     {item}
                                                 </option>
-                                            </>)
+                                           )
                                         })}
                                     </select>
                                 </div>

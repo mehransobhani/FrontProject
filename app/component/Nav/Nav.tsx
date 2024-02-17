@@ -4,7 +4,7 @@ import Link from "next/link";
 import {Bars3Icon} from "@heroicons/react/24/solid";
 import {XMarkIcon} from "@heroicons/react/24/solid";
 import Header from "../Header/Header";
-import {useState} from "react";
+import {Fragment, useState} from "react";
 import {usePathname} from "next/navigation";
 
 export default function Nav() {
@@ -25,7 +25,7 @@ export default function Nav() {
         {name: "صفحه اصلی", href: "/", current: pathName=="/", sub:null},
         {
             name: "خدمات",
-            href: "",
+            href: "#",
             current: false,
             sub: [  {
                 name: "درخواست پشتیبانی آنلاین",
@@ -54,9 +54,9 @@ export default function Nav() {
 
                                     <div className="hidden sm:mx-6 sm:block">
                                         <div className="flex  items-start ">
-                                            {navigation.map((item) => (
-                                                <>
-                                                    <div className={"relative"}>
+                                            {navigation.map((item:menu,index:number) => (
+                                                <Fragment key={index}>
+                                                    <div className={"relative"} key={index}>
                                                         <Link
                                                             key={item.name}
                                                             href={item.href}
@@ -80,8 +80,8 @@ export default function Nav() {
                                                                     <ul className="border border-gray-200 rounded overflow-hidden shadow-md">
 
                                                                         {
-                                                                            item.sub.map((subItem) => (
-                                                                                <Link
+                                                                            item.sub.map((subItem:menu , index:number) => (
+                                                                                <Link key={index}
                                                                                     className={classNames(
                                                                                         subItem.current
                                                                                             ? "text-yellow-600"
@@ -102,7 +102,7 @@ export default function Nav() {
                                                             </> : ""
                                                         }
                                                     </div>
-                                                </>
+                                                </Fragment>
                                             ))}
 
                                         </div>
@@ -129,8 +129,8 @@ export default function Nav() {
 
                         <Disclosure.Panel className="sm:hidden">
                             <div className="space-y-1 px-4 min-h-screen border-t border-neutral-200  bg-white  ">
-                                {navigation.map((item) => (
-                                        <>
+                                {navigation.map((item:menu,index:number) => (
+                                        <Fragment key={index}>
                                             <Disclosure.Button
                                                 key={item.name}
                                                 as="a"
@@ -147,7 +147,7 @@ export default function Nav() {
                                             </Disclosure.Button>
 
                                             {
-                                                item.sub && item.sub.map((subItem) => (
+                                                item.sub && item.sub.map((subItem:menu , index:number) => (
                                                     <Disclosure.Button
                                                         key={subItem.name}
                                                         as="a"
@@ -164,7 +164,7 @@ export default function Nav() {
                                                     </Disclosure.Button>
                                                 ))
                                             }
-                                        </>
+                                        </Fragment>
 
 
                                     )

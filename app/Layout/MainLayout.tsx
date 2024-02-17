@@ -24,15 +24,13 @@ export default function MainLayout({
 
 
     return (
-        <html lang="en">
-        <body className={[myFont.className, "bg-white"].join(" ")} style={{ direction: "rtl" }}>
+   <>
         <div className="  mb-[70px] sm:mb-[150px]">
             <Nav />
         </div>
         <ToastContainer  rtl={true}  />
         {children}
         <Footer />
-        </body>
-        </html>
+   </>
     );
 }

@@ -53,7 +53,7 @@ export default function EditServiceModal(props: props) {
                             وضعیت سرویس</label>
                         <br/>
 
-                        <select name={"status"}
+                        <select name={"status"} defaultValue={props.data.status}
                             className=" w-full border py-2 rounded-md  bg-white bg-none  px-2 text-gray-500  focus:ring-inset focus:ring-indigo-600 sm:text-sm">
                             <option value={"open"} selected={props.data.status == "open"}>
                                 باز
@@ -70,10 +70,9 @@ export default function EditServiceModal(props: props) {
                         <label className="text-gray-800 text-sm font-bold leading-tight tracking-normal">
                             پیگیری </label>
 
-                        <textarea name={"description"}
+                        <textarea name={"description"} defaultValue={props.data.description}
                                className="p-2 mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-32 flex items-center pl-3 text-sm border-gray-300 rounded border"
                                placeholder="پیگیری">
-                            {props.data.description}
                         </textarea>
 
                         <div className="flex items-center justify-start w-full">
