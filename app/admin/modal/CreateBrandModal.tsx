@@ -20,6 +20,7 @@ export default function CreateBrandModal(props: props) {
         try {
             const validatedData = BrandFormValidation.parse({brand})
         } catch (err: any) {
+            toast.error("پر کردن نام برند اجباریست")
             return;
         }
         try {
@@ -48,10 +49,13 @@ export default function CreateBrandModal(props: props) {
 
     return (<>
         <div
+            onClick={props.close}
             className="py-12 bg-gray-700 bg-opacity-80 transition duration-150 ease-in-out fixed top-0 right-0 bottom-0 left-0 z-50 "
             id="modal">
             <div role="alert" className="container mx-auto w-11/12 md:w-2/3 max-w-lg">
-                <div className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
+                <div
+                    onClick={(e):void=>{ e.stopPropagation()}}
+                    className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400 ">
                     <div className="w-12 flex justify-start text-gray-600 mb-3">
                         <IdentificationIcon/>
                     </div>
