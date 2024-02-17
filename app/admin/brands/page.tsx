@@ -9,8 +9,8 @@ export default async function Home() {
     let data = await getBrands(token);
 
      return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-12 bg-slate-50 text-blue-950">
-            <BrandTable data={data}  token={token}  />
-        </main>
-    );
+         <main className="flex min-h-screen flex-col items-center justify-between py-12 px-1 bg-slate-50 text-blue-950">
+             <BrandTable data={data} token={token}/>
+         </main>
+     );
 }
