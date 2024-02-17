@@ -2,15 +2,23 @@
 import ProfileDropDown from "@/app/admin/Navbar/ProfileDropDown";
 import {useEffect, useState} from "react";
 import {getCookie} from "@/app/admin/GetCookie";
+import {me} from "@/app/admin/api/UserApi";
 
 export default function AdminNavbar(props: { logout: any }) {
 
     const [token, setToken] = useState<string | undefined>("");
+    const [name, setName] = useState<string | undefined>("");
 
     useEffect(() => {
         let c: Promise<string | undefined> = getCookie()
         c.then((userToken: string | undefined): void => {
             setToken(userToken)
+
+            me(token).then((res):void => {
+                if(res.first_name!=undefined && res.last_name!=undefined)
+                 setName(res.first_name+" "+res.last_name);
+            });
+
         })
     })
 
@@ -29,6 +37,7 @@ export default function AdminNavbar(props: { logout: any }) {
                                 <i className="fas fa-search"></i>
                             </span>
                             <ProfileDropDown token={token} logout={props.logout}/>
+                            <strong  className={"grid justify-center items-center px-2 font-bold"}> {name} </strong>
                         </div>
                     </form>
                     <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
