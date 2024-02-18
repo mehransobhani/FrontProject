@@ -1,7 +1,13 @@
  import {getUsers} from "../api/UserApi";
 import CustomerTable from "../table/CustomerTable";
  import {cookies} from "next/headers";
+ import type {Metadata} from "next";
 
+ export const metadata: Metadata = {
+     title: "مدیریت کاربران",
+     description: "مدیریت کاربران",
+     robots:"noindex,nofollow"
+ };
 export default async function Home() {
 
     const token:string|undefined=cookies().get("access-token")?.value;

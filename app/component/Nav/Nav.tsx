@@ -8,7 +8,7 @@ import {Fragment, useState} from "react";
 import {usePathname} from "next/navigation";
 
 export default function Nav() {
-    const[openSubMenu,setOpenSubMenu]=useState(false);
+    const[openSubMenu,setOpenSubMenu]=useState<boolean>(false);
     function classNames(...classes: any) {
         return classes.filter(Boolean).join(" ");
     }

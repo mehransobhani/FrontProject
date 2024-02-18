@@ -3,7 +3,24 @@ import Header from "./component/Header/Header";
 import Hero from "./component/Hero/Hero";
 import MainLayout from "@/app/Layout/MainLayout";
 import Head from "next/head";
+import type {Metadata} from "next";
 
+export const metadata: Metadata = {
+    title: "تعمیر تلوزیون",
+    description: "همین حالا درخواست پشتیبانی تلویزیون های ایکس ویژن، تی سی ال و سونی خود را ثبت نمایید",
+    twitter:{
+        title: "تعمیر تلوزیون",
+        description: "همین حالا درخواست پشتیبانی تلویزیون های ایکس ویژن، تی سی ال و سونی خود را ثبت نمایید",
+    },
+
+    openGraph:{
+        title: "تعمیر تلوزیون",
+        description: "همین حالا درخواست پشتیبانی تلویزیون های ایکس ویژن، تی سی ال و سونی خود را ثبت نمایید",
+        type:"website",
+        phoneNumbers:["۰۲۱-۹۱۳۰۳۶۶۶","۰۲۱-۹۱۳۰۹۵۷۵"],
+        countryName:"iran",
+    },
+};
 export default function Home() {
    return (
       <>

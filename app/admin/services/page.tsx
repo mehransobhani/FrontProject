@@ -1,7 +1,13 @@
 import ServiceTable from "../table/ServiceTable";
 import { getServices } from "../api/ServiceApi";
 import {cookies} from "next/headers";
+import type {Metadata} from "next";
 
+export const metadata: Metadata = {
+    title: "مدیریت سرویس ها",
+    description: "مدیریت سرویس ها",
+    robots:"noindex,nofollow"
+};
 export default async function Home() {
 
     const token:string|undefined=cookies().get("access-token")?.value;

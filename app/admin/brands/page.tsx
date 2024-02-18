@@ -1,6 +1,13 @@
  import BrandTable from "../table/BrandTable";
 import {addBrand, getBrands} from "../api/BrandApi";
  import {cookies} from "next/headers";
+ import type {Metadata} from "next";
+
+ export const metadata: Metadata = {
+     title: "مدیریت برند ها",
+     description: "مدیریت برند ها",
+     robots:"noindex,nofollow"
+ };
 
 export default async function Home() {
 
