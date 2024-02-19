@@ -18,7 +18,7 @@ export default function AdminNavbar(props: { logout: any ,name:string|undefined,
                                 <i className="fas fa-search"></i>
                             </span>
                             <ProfileDropDown token={props.token} logout={props.logout}/>
-                            <strong  className={"grid justify-center items-center px-2 font-bold"}> {props.name} </strong>
+                            <strong  className={"grid justify-center items-center px-2 font-bold text-white"}> {props.name} </strong>
                         </div>
                     </form>
                     <ul className="flex-col md:flex-row list-none items-center hidden md:flex">

@@ -1,7 +1,7 @@
 "use client"
 import {Disclosure} from "@headlessui/react";
 import Link from "next/link";
-import {Bars3Icon} from "@heroicons/react/24/solid";
+import {Bars2Icon, Bars3Icon} from "@heroicons/react/24/solid";
 import {XMarkIcon} from "@heroicons/react/24/solid";
 import Header from "../Header/Header";
 import {Fragment, useState} from "react";
@@ -131,26 +131,31 @@ export default function Nav() {
                             <div className="space-y-1 px-4 min-h-screen border-t border-neutral-200  bg-white  ">
                                 {navigation.map((item:menu,index:number) => (
                                         <Fragment key={index}>
-                                            <Disclosure.Button
-                                                key={item.name}
-                                                as={item.sub?"span":"a"}
+                                            <Link
+                                                key={item.name} 
                                                 href={item.href}
-                                                className={classNames(
+                                                onClick={()=>{item.sub&&setOpenSubMenu(!openSubMenu)}}
+                                                className={[classNames(
                                                     item.current
                                                         ? "text-yellow-600 "
                                                         : "text-gray-800  ",
                                                     "block py-4 text-base font-medium border-t border-neutral-200  text-right"
-                                                )}
+                                                ) , item.sub?"cursor-pointer":""].join(" ")}
                                                 aria-current={item.current ? "page" : undefined}
                                             >
-                                                {item.name}
-                                            </Disclosure.Button>
+                                                <div className="flex">
+                                                {item.sub && <span className="flex ml-2"><Bars2Icon className="h-full w-4 text-gray-800" /></span>}
+
+                                                <span className="flex">   {item.name}</span>
+
+
+                                               </div>
+                                            </Link>
 
                                             {
-                                                item.sub && item.sub.map((subItem:menu , index:number) => (
-                                                    <Disclosure.Button
-                                                        key={subItem.name}
-                                                        as="a"
+                                               openSubMenu && item.sub && item.sub.map((subItem:menu , index:number) => (
+                                                    <Link
+                                                        key={subItem.name} 
                                                         href={subItem.href}
                                                         className={classNames(
                                                             subItem.current
@@ -161,7 +166,7 @@ export default function Nav() {
                                                         aria-current={subItem.current ? "page" : undefined}
                                                     >
                                                         {subItem.name}
-                                                    </Disclosure.Button>
+                                                    </Link>
                                                 ))
                                             }
                                         </Fragment>

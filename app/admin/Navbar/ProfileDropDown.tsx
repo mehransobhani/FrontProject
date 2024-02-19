@@ -1,5 +1,5 @@
 "use client"
-import {useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import profile from "@/public/icon/profile.jpg"
 import Image from "next/image";
 import Link from "next/link";
@@ -8,15 +8,39 @@ import ChangePasswordModal from "@/app/admin/modal/ChangePasswordModal";
 export default function ProfileDropDown(props: {token:string|undefined , logout:any}) {
     const [show, setShow] = useState(false);
     const [changePasswordModal, setChangePasswordModal] = useState(false);
+    const wrapperRef = useRef(null);
+    useOutsideAlerter(wrapperRef);
+
+    function useOutsideAlerter(ref:any) {
+        useEffect(() => {
+          /**
+           * Alert if clicked on outside of element
+           */
+          function handleClickOutside(event:any) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                setShow(false)
+            }
+          }
+          // Bind the event listener
+          document.addEventListener("mousedown", handleClickOutside);
+          return () => {
+            // Unbind the event listener on clean up
+            document.removeEventListener("mousedown", handleClickOutside);
+          };
+        }, [ref]);
+      }
+
+
      return (
         <>
-
-            {
+             {
                 changePasswordModal && <ChangePasswordModal close={()=>setChangePasswordModal(false)} token={props.token}/>
             }
             <div className="w-12 h-12 bg-gray-300 rounded-full cursor-pointer mr-3 z-50" onClick={() => {
                 setShow(!show)
-            }}>
+            }}   
+            ref={wrapperRef}
+            >
                 <Image src={profile} alt={"profile"} className="w-12 h-12 rounded-full"/>
                 {show == true ? <div id="dropdown-menu"
                                      className="origin-top-right absolute right-0 mt-2 w-60 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">

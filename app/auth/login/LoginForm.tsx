@@ -9,10 +9,12 @@ export default function LoginForm
     const [loading, setLoading] = useState<boolean>(false);
     const [loginError, setLoginError] = useState<boolean>(false);
 
+    const p2e = (s: any) => s.replace(/[۰-۹]/g, (d: string) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d).toString());
+
     async function login(e: FormData) {
 
         setLoading(true)
-        let username: FormDataEntryValue | null = e.get("phone");
+        let username: FormDataEntryValue | null = p2e(e.get("phone"));
         let password: FormDataEntryValue | null = e.get("password");
 
         let data = await loginApi(username, password);
