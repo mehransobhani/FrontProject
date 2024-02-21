@@ -25,7 +25,7 @@ export default async function Main() {
                 تلویزیون به زبان ساده
             </h1>
             <>
-                <div className='{"text-gray-900"}'>
+                <div className={"text-gray-800 text-lg"}>
                     <span>بریم به ساده ترین حالت ممکن عملکرد تلویزیون رو توضیح بدم</span>
                     <p>خونه های قدیمی که پنجره های رنگی داشت رو یادتونه</p>
                     <p>
@@ -173,7 +173,7 @@ export default async function Main() {
 
                     </div>
 
-                    <div className={"my-10"}>
+                    <div className={"mt-10"}>
                         <div className={"grid sm:grid-cols-2 gap-1"}>
                             <div className={"flex"}>
 
