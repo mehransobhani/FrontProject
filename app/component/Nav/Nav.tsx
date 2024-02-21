@@ -41,7 +41,7 @@ export default function Nav() {
 
             <Disclosure
                 as="nav"
-                className={` fixed top-0 left-0 right-0 text-white  border-b border-neutral-200 backdrop-blur-sm  bg-sky-600  z-20  `}
+                className={` fixed top-0 left-0 right-0 text-white   backdrop-blur-sm  bg-sky-600  z-20  `}
             >
                 {({open}: { open: any }) => (
                     <>
@@ -132,7 +132,7 @@ export default function Nav() {
                                 {navigation.map((item:menu,index:number) => (
                                         <Fragment key={index}>
                                             <Link
-                                                key={item.name} 
+                                                key={item.name}
                                                 href={item.href}
                                                 onClick={()=>{item.sub&&setOpenSubMenu(!openSubMenu)}}
                                                 className={[classNames(
@@ -155,7 +155,7 @@ export default function Nav() {
                                             {
                                                openSubMenu && item.sub && item.sub.map((subItem:menu , index:number) => (
                                                     <Link
-                                                        key={subItem.name} 
+                                                        key={subItem.name}
                                                         href={subItem.href}
                                                         className={classNames(
                                                             subItem.current
