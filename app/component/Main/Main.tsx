@@ -239,7 +239,7 @@ export default async function Main() {
                             تصویر یک نشانگر از نمای نزدیک
                         </p>
                     </div>
-                    <p className={"my-5"}>
+                    <div className={"my-5"}>
                         <Image
                             src={file6}
                             alt={"HomePageBanner"}
@@ -250,7 +250,7 @@ export default async function Main() {
                         <p className={"text-center py-1 font-bold"}>
                             تصویر چشم انسان از نمای نزدیک
                         </p>
-                    </p>
+                    </div>
                      <p>
                         حالا فرض کن که یک طلق شفاف داریم که میتونیم هر نقطه شو به هر رنگی که دلمون
                         میخواد دربیاریم
