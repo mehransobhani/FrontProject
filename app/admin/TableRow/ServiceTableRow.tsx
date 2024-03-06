@@ -12,6 +12,8 @@ interface data {
     first_name: string,
     last_name: string,
     brand: string,
+  address: string,
+    phone: string,
     status: string,
     created_date: string,
     description: string,

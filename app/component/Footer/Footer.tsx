@@ -35,10 +35,18 @@ export default function Footer() {
                                 </h3>
 
                                 <div className="flex flex-col items-center mt-4 space-y-4">
-                                    <span className="text-md font-bold text-white">۰۲۱-۹۱۳۰۹۵۷۵</span>
-
-                                    <span className="text-md font-bold text-white">۰۲۱-۹۱۳۰۳۶۶۶</span>
-
+    <a
+                                 className={"text-md font-bold text-white"}
+                                 href="tel:02191303666"
+                              >
+                                 ۰۲۱-۹۱۳۰۳۶۶۶
+                              </a>
+ <a
+                                 className={"text-md font-bold text-white"}
+                                 href="tel:02191309575"
+                              >
+                                 ۰۲۱-۹۱۳۰۹۵۷۵
+                              </a>
                                 </div>
                             </div>
 

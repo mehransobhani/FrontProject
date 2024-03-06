@@ -90,7 +90,7 @@ export default function ContactUsForm(props: prop) {
         }
 
         let registerData = await registerService(fName, lName, phone, brand, address);
-        if (registerData.status == 201) {
+        if (registerData.status == 201 || registerData.status == 200 ) {
             toast.success("درخواست با موفقیت ثبت شد، همکاران ما در اسرع وقت با شما تماس خواهند گرفت")
             await sleep(5000);
             redirect("/")
@@ -219,7 +219,7 @@ export default function ContactUsForm(props: prop) {
                         <div className="mt-10">
                             <button type="submit"
                                     className="block w-full rounded-md bg-sky-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-sky-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                خیره
+                                ذخیره
                             </button>
                         </div>
                     </div>

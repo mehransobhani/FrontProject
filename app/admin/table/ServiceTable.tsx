@@ -8,6 +8,8 @@ interface propsData {
     id: string,
     first_name: string,
     last_name: string,
+  address: string,
+    phone: string,
     brand: string,
     status: string,
     created_date: string,

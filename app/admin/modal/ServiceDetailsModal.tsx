@@ -1,18 +1,10 @@
 import {JDate} from "@/app/admin/JDate/JDate";
-import {EyeIcon} from "@heroicons/react/24/solid";
 
 interface prop {
     data: any,
     close:any
 }
 
-interface propData {
-    description: string | null,
-    service: string | null,
-    status: string ,
-    timestamp: string | null,
-    user: string | null,
-}
 export default function ServiceDetailsModal(props: prop) {
 
 
@@ -26,61 +18,77 @@ export default function ServiceDetailsModal(props: prop) {
     return (<>
         <div
             onClick={props.close}
-            className="py-12 bg-gray-700 transition text-gray-800 bg-opacity-80 duration-150 ease-in-out z-50 fixed top-0 right-0 bottom-0 left-0 " id="modal">
-            <div role="alert" className="container mx-auto w-11/12 md:w-[60%] ">
+            className="py-2 sm:py-12 bg-gray-700 transition text-gray-800 bg-opacity-80 duration-150 ease-in-out z-50 fixed top-0 right-0 bottom-0 left-0 " id="modal">
+            <div role="alert" className="container mx-auto w-11/12 md:w-[60%] h-screen overflow-y-scroll ">
                 <div
-                    onClick={(e):void=>{ e.stopPropagation()}}
+                    onClick={(e): void => {
+                        e.stopPropagation()
+                    }}
                     className="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400">
-                    <div className="w-full flex justify-start text-gray-600 mb-3">
-                        <EyeIcon className="h-6 w-6 text-gray-500" />
-                    </div>
+
                     <div className={"py-4 font-bold text-xl"}>جزئیات سرویس</div>
                     <hr/>
-                    <div className={"py-5"}>
+                    <div className={"py-1"}>
                         <span className={"text-gray-800 font-bold"}>نام</span>
                         <br/>
-                        <div className={"mt-2"}>
+                        <div className={"mt-0 sm:mt-2"}>
                             <span className={"text-gray-600 font-bold"}>{props.data.first_name}</span>
                         </div>
                     </div>
                     <hr/>
-                    <div className={"py-5"}>
+                    <div className={"py-1"}>
                         <span className={"text-gray-800 font-bold"}>نام خانوادگی</span>
                         <br/>
-                        <div className={"mt-2"}>
+                        <div className={"mt-0 sm:mt-2"}>
                             <span className={"text-gray-600 font-bold"}>{props.data.last_name}</span>
                         </div>
                     </div>
                     <hr/>
-                    <div className={"py-5"}>
+                    <div className={"py-1"}>
                         <span className={"text-gray-800 font-bold"}>برند  </span>
                         <br/>
-                        <div className={"mt-2"}>
+                        <div className={"mt-0 sm:mt-2"}>
                             <span className={"text-gray-600 font-bold"}>{props.data.brand}</span>
                         </div>
                     </div>
                     <hr/>
+                    <div className={"py-1"}>
+                        <span className={"text-gray-800 font-bold"}>ادرس  </span>
+                        <br/>
+                        <div className={"mt-0 sm:mt-2"}>
+                            <span className={"text-gray-600 font-bold"}>{props.data.address}</span>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div className={"py-1"}>
+                        <span className={"text-gray-800 font-bold"}>شماره موبایل  </span>
+                        <br/>
+                        <div className={"mt-0 sm:mt-2"}>
+                            <span className={"text-gray-600 font-bold"}>{props.data.phone}</span>
+                        </div>
+                    </div>
+                    <hr/>
 
-                    <div className={"py-5"}>
+                    <div className={"py-1"}>
                         <span className={"text-gray-800 font-bold"}>پیگیری</span>
                         <br/>
-                        <div className={"mt-2"}>
+                        <div className={"mt-0 sm:mt-2"}>
                             <span className={"text-gray-600 font-bold"}>{props.data.description}</span>
                         </div>
                     </div>
                     <hr/>
-                    <div className={"py-5"}>
+                    <div className={"py-1"}>
                         <span className={"text-gray-800 font-bold"}>تاریخ پیگیری</span>
                         <br/>
-                        <div className={"mt-2"}>
+                        <div className={"mt-0 sm:mt-2"}>
                             <span className={"text-gray-600 font-bold"}> {JDate(props.data.last_update)}</span>
                         </div>
                     </div>
                     <hr/>
-                    <div className={"py-5"}>
+                    <div className={"py-1"}>
                         <span className={"text-gray-800 font-bold"}>وضعیت  </span>
                         <br/>
-                        <div className={"mt-2"}>
+                        <div className={"mt-0 sm:mt-2"}>
                             <span className={"text-gray-600 font-bold"}>{status[serviceStatus]}</span>
                         </div>
                     </div>
